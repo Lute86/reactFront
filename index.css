@@ -1,0 +1,117 @@
+@import './components/Navbar.css';
+@import './components/Footer.css';
+@import './pages/Welcome.css';
+@import './pages/Courses.css';
+@import './pages/Login.css';
+@import './pages/Registration.css';
+
+* {
+	padding: 0;
+  margin: 0;
+	box-sizing: border-box;
+	font-family: sans-serif, Arial, Helvetica, sans-serif;
+}
+
+html{
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  
+}
+body {
+  display: flex;
+  flex-direction: column;
+  margin-top: 7rem;
+  background-color: var(--bgColor);
+  min-height: 100vh;
+}
+
+h1, h2{
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+
+}
+
+/* Loading */
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.spinner {
+  animation: spin 1s linear infinite; /* Apply a spinning animation */
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg); /* Starting rotation angle */
+  }
+  to {
+    transform: rotate(360deg); /* Ending rotation angle */
+  }
+}
+
+
+
+/* Responsive */
+
+
+/* Courses */
+@media only screen and (max-width: 768px) {
+  .container-courses {
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+  }
+
+  .courses-options {
+    flex-direction: row;
+    padding: 1rem;
+    align-items: center;
+    font-size: smaller;
+    margin-top: 2rem;
+  }
+
+  .p-option {
+    padding: 0.5rem 1rem;
+  }
+
+  /* ... Other existing styles for Courses ... */
+}
+
+/* Login */
+@media only screen and (max-width: 768px) {
+  .login-form {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  .login-container{
+    margin: 1rem 0 4rem;
+  }
+
+  /* ... Other existing styles for Login ... */
+}
+
+/* Footer */
+@media screen and (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer-column {
+    text-align: center;
+  }
+
+  /* ... Other existing styles for Footer ... */
+}
+
+/* Additional breakpoint at 400px */
+@media only screen and (max-width: 400px) {
+  /* Add your specific styles for screens up to 400px */
+}

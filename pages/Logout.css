@@ -1,0 +1,30 @@
+.logout-container {
+  min-height: 80vh;
+}
+
+.logout-content{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 50vh;
+}
+
+.p-logout{
+  margin-bottom: 30px;
+}
+
+.logout-container button {
+  width: 150px;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.logout-container button:hover {
+  background-color: #0056b3;
+}

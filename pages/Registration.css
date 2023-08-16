@@ -1,0 +1,71 @@
+/* Add this CSS in your Registration.css stylesheet */
+.registration-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  margin-bottom: 5rem;
+  margin-top: 2rem; 
+}
+
+.registration-form {
+  background-color: #e0dddd;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 12px 12px 10px rgba(0, 0, 0, 0.315); /* Add the box shadow */
+}
+
+.registration-form h1 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.registration-form label {
+  font-weight: bold;
+}
+
+.registration-form input {
+  width: 100%;
+  padding: 0.5rem;
+  margin: 0.5rem 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.registration-form button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  margin: 1rem auto; /* Center the button horizontally and add margin to control spacing */
+  display: block; /* Ensure the button takes up full width */
+  width: 100%;
+}
+
+.registration-form button:hover {
+  background-color: #0056b3;
+}
+
+.registration-form a {
+  text-decoration: none;
+  color: #007bff;
+  transition: color 0.2s;
+}
+
+.registration-form a:hover {
+  color: #0056b3;
+}
+
+.p-login-error {
+  visibility: visible;
+  color: red;
+  padding-bottom: 10px;
+}
+
+.p-login{
+  visibility: hidden;
+  width: 100%;
+  text-align: center;
+}
