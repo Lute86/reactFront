@@ -32,6 +32,10 @@
   border-radius: 5px;
 }
 
+.label-fail {
+  color: red;
+}
+
 .registration-form button {
   background-color: #007bff;
   color: white;

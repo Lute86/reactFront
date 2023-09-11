@@ -10,6 +10,7 @@ const Registration = () => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [failedInput, setFailedInput] = useState(new Set());
   const navigate = useNavigate();
   const {
     loginError,
@@ -32,7 +33,7 @@ const Registration = () => {
 
   const handleRegistration = async () => {
     setLoading(true);
-  
+    setFailedInput([]);
     try {
       const newUser = {
         first_name: firstName,
@@ -61,48 +62,78 @@ const Registration = () => {
         console.log("Entro server error");
         setServerDown(true);
       }
-  
+      else if (!error.response || error.response && error.response.status === 400) {
+        // error.response.data.errors.forEach(element => {
+        //   console.log("Wrong credentials 400", element.msg, element.param) 
+        //   setFailedInput(prevFailedInput => [...prevFailedInput, element.param]);
+        // })
+        const paramValues = error.response.data.errors
+        console.log(paramValues)
+        paramValues.map(element => {
+          console.log("Wrong credentials 400", element.msg, element.param) 
+          setFailedInput((prev) => new Set([...prev, element.param]));
+        });
+      }
+      console.log(failedInput)
       setLoading(false);
     }
   };
   
+  const handleInputs = (value) => {
   
+    let valueInput = false;
+  
+    failedInput.forEach((element) => {
+      if (element === value) {
+        valueInput = true;
+      }
+    });
+    console.log(valueInput)
+    return valueInput;
+  };
 
   return (
     <div className="registration-container">
       <div className="registration-form">
         <h1>Registration</h1>
         <div>
-          <label>First Name:</label>
-          <input
+          <label className={`${handleInputs("first_name")?'label-fail':""}`}>First Name:
+          <input 
             type="text"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
-          />
+            placeholder="John"
+          /></label>
         </div>
         <div>
-          <label>Last Name:</label>
-          <input
+          <label className={`${handleInputs("last_name")?'label-fail':""}`}>Last Name:
+          <input 
             type="text"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
+            placeholder="Doe"
           />
+          </label>
         </div>
         <div>
-          <label>Email:</label>
-          <input
+          <label className={`${handleInputs("email")?'label-fail':""}`}>Email:
+          <input 
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            placeholder="john@doe.com"
           />
+          </label>
         </div>
         <div>
-          <label>Password:</label>
-          <input
+          <label className={`${handleInputs("password")?'label-fail':""}`}>Password:
+          <input className={``}
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            placeholder="1exMdw"
           />
+          </label>
         </div>
         <p className={loginError?'p-login-error':'p-login'}>{serverDown ? 'Server down' : `"Wrong credentials" ${duplicateEmail ? '. Email already exists.' : ''}`}</p>
         <button onClick={handleRegistration}>{!loading ? "Register" : <Spinner />}</button>

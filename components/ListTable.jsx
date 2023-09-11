@@ -1,14 +1,14 @@
 import React from "react";
 import { FaEdit, FaTrash } from "react-icons/fa";
-import './ListTable.css'
+import "./ListTable.css";
 
 const ListTable = ({ data, onDelete, onEdit }) => {
   if (!data || data.length === 0) {
     return <p>No data to display.</p>;
   }
-
   const tableHeaders = Object.keys(data[0]);
-
+  console.log("Table headers", tableHeaders);
+  console.log("DAta", data);
   return (
     <table className="list-table">
       <thead>
@@ -21,23 +21,25 @@ const ListTable = ({ data, onDelete, onEdit }) => {
         </tr>
       </thead>
       <tbody>
-        {data.map((item) => (
-          <tr key={item.id}>
-            {tableHeaders.map((header) => (
-              <td key={header}>{item[header]}</td>
-            ))}
-            <td>
-              <button onClick={() => onEdit(item.id)}>
-                <FaEdit />
-              </button>
-            </td>
-            <td>
-              <button onClick={() => onDelete(item.id)}>
-                <FaTrash />
-              </button>
-            </td>
-          </tr>
-        ))}
+        {data.map((item) => {
+          return (
+            <tr key={item.id}>
+              {tableHeaders.map((header) => (
+                <td key={header}>{item[header]}</td>
+              ))}
+              <td>
+                <button onClick={() => onEdit(item.id)}>
+                  <FaEdit />
+                </button>
+              </td>
+              <td>
+                <button onClick={() => onDelete(item.id)}>
+                  <FaTrash />
+                </button>
+              </td>
+            </tr>
+          );
+        })}
       </tbody>
     </table>
   );

@@ -1,38 +1,65 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import ListTable from "../components/ListTable";
-import './CourseList.css'
+import "./CourseList.css";
+import { useGlobalState } from "../context";
 
 const CoursesList = () => {
   const [courses, setCourses] = useState([]);
+  const { userInfo, userRole } = useGlobalState();
 
   useEffect(() => {
     async function fetchCourses() {
       try {
-        const response = await axios.get("http://localhost:4001/course/all");
-        setCourses(response.data);
+        if (userInfo && userInfo.id) {
+          if (userRole === "admin") {
+            const response = await axios.get("http://localhost:4001/course/all");
+            setCourses(response.data);
+          } else {
+            const response = await axios.get(
+              `http://localhost:4001/user/my/courses/${userInfo.id}`,
+              { withCredentials: true }
+            );
+            setCourses(response.data);
+          }
+        }
       } catch (error) {
         console.error("Fetch courses error", error);
       }
     }
 
     fetchCourses();
-  }, []);
+  }, [userInfo, userRole]);
 
-  const deleteCourse = (id) => {
-    // Implement delete functionality here
-    console.log(`Deleting course with ID: ${id}`);
-  };
+  const unsubscribeFromCourse = async (courseId) => {
+    try {
+      // Send a request to unsubscribe the user from the course
+      await axios.delete(`http://localhost:4001/user/courses/${userInfo.id}`, {
+        data: { courseId },
+        withCredentials: true,
+      });
 
-  const editCourse = (id) => {
-    // Implement edit functionality here
-    console.log(`Editing course with ID: ${id}`);
+      // Update the courses list by removing the unsubscribed course
+      setCourses((prevCourses) =>
+        prevCourses.filter((course) => course.id !== courseId)
+      );
+    } catch (error) {
+      console.error("Unsubscribe error", error);
+    }
   };
 
   return (
     <div className="course-list-container">
-      <h2>Courses List</h2>
-      <ListTable data={courses} onDelete={deleteCourse} onEdit={editCourse} />
+      <h2>My Courses</h2>
+      <ul className="user-courses-list">
+        {courses.map((course) => (
+          <li key={course.id}>
+            {course.course_name}
+            <button onClick={() => unsubscribeFromCourse(course.id)}>
+              Unsubscribe
+            </button>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

@@ -43,9 +43,9 @@ function Login() {
       );
 
       const user = response.data.user;
-      console.log("user",user)
-      console.log("user role",user.role)
-      console.log("data",response.data.user)
+      // console.log("user",user)
+      // console.log("user role",user.role)
+      // console.log("data",response.data.user)
       setIsLoggedIn(true);
       setUserRole(user.role); // Set the user's role state
       setUserInfo(user);
@@ -76,7 +76,7 @@ function Login() {
       <div className="login-form">
         <h1>Login</h1>
         <div>
-          <label>Username:</label>
+          <label>Email:</label>
           <input
             type="text"
             value={username}

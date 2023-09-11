@@ -1,0 +1,41 @@
+.list-unique {
+  width: 80%;
+  border-collapse: collapse;
+  margin: 1rem auto;
+  font-size: 14px;
+}
+
+.list-unique th,
+.list-unique td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: center;
+
+}
+
+.list-unique th {
+  background-color: #f2f2f2;
+}
+
+.list-unique-tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.list-unique-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.list-unique-button:hover {
+  color: #007bff;
+}
+
+/* Media query for screens smaller than 768px */
+@media (max-width: 768px) {
+  .list-unique-table {
+    margin-left: 4rem;
+    margin-right: 4rem;
+    overflow-x: scroll; /* Add horizontal scroll on smaller screens */
+  }
+}

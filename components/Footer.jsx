@@ -25,7 +25,7 @@ function Footer() {
             </li>
             <li>
               {isLoggedIn && <Link to="/logout">Logout</Link>}
-              {!isLoggedIn && <Link to="/login">Login</Link>}{" / "}
+              {!isLoggedIn && <Link to="/login">Login</Link>}{!isLoggedIn && " / "}
               {!isLoggedIn && <Link to="/register">Register</Link>}
             </li>
           </ul>

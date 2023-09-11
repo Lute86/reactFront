@@ -11,8 +11,8 @@ function Welcome() {
 
   return (
     <div className="welcome-container">
-      <section class="background-section">
-        <div class="bg-section-content">
+      <section className="background-section">
+        <div className="bg-section-content">
           <h1 className="bg-img-title">Welcome to Commurse</h1>
           <p className="bg-img-subtitle">Discover a world of opportunities</p>
         </div>
@@ -85,7 +85,6 @@ function Welcome() {
               title={company.name}
             />
           ))}
-          {/* Add more images */}
         </div>
       </section>
     </div>
