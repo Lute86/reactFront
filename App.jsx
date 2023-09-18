@@ -12,6 +12,7 @@ import { AppContext } from "./context";
 import UserDash from "./dash/UserDash";
 import AdminDash from "./dash/AdminDash";
 import Courses from "./pages/Courses";
+import ContactForm from "./pages/Contact";
 
 const App = () => {
   const { isLoggedIn } = useGlobalState();
@@ -30,6 +31,7 @@ const App = () => {
           <Route path="/logout" element={<Logout />} />
           <Route path="/user" element={<UserDash />} />
           <Route path="/admin" element={<AdminDash />} />
+          <Route path="/contact" element={<ContactForm />} />
         </Routes>
 
         <Footer />

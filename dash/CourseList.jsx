@@ -33,8 +33,7 @@ const CoursesList = () => {
   const unsubscribeFromCourse = async (courseId) => {
     try {
       // Send a request to unsubscribe the user from the course
-      await axios.delete(`http://localhost:4001/user/courses/${userInfo.id}`, {
-        data: { courseId },
+      await axios.delete(`http://localhost:4001/user/${userInfo.id}/removeCourse/${courseId}`, {
         withCredentials: true,
       });
 

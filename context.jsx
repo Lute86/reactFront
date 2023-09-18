@@ -15,6 +15,7 @@ const AppProvider = ({children}) => {
   const [loginError, setLoginError] = useState(false)
   const [serverDown, setServerDown] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [modalOpen, setModalOpen] = useState(false)
 
 
   
@@ -25,6 +26,7 @@ const AppProvider = ({children}) => {
     isLoggedIn, setIsLoggedIn,
     userRole, setUserRole,
     userInfo, setUserInfo,
+    modalOpen, setModalOpen
     }} >
       {children}
   </AppContext.Provider>

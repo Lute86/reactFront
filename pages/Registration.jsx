@@ -97,43 +97,48 @@ const Registration = () => {
       <div className="registration-form">
         <h1>Registration</h1>
         <div>
-          <label className={`${handleInputs("first_name")?'label-fail':""}`}>First Name:
+          <label for="name" className={`${handleInputs("first_name")?'label-fail':""}`}>First Name:
+          </label>
           <input 
+            id="name"
             type="text"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
             placeholder="John"
-          /></label>
+          />
         </div>
         <div>
-          <label className={`${handleInputs("last_name")?'label-fail':""}`}>Last Name:
+          <label for="last" className={`${handleInputs("last_name")?'label-fail':""}`}>Last Name:
+          </label>
           <input 
+            id="last"
             type="text"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
             placeholder="Doe"
           />
-          </label>
         </div>
         <div>
-          <label className={`${handleInputs("email")?'label-fail':""}`}>Email:
+          <label for="email" className={`${handleInputs("email")?'label-fail':""}`}>Email:
+          </label>
           <input 
+            id="email"
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="john@doe.com"
           />
-          </label>
         </div>
         <div>
-          <label className={`${handleInputs("password")?'label-fail':""}`}>Password:
+          <label for="password" className={`${handleInputs("password")?'label-fail':""}`}>Password:
+          </label>
           <input className={``}
+            id="password"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="1exMdw"
           />
-          </label>
         </div>
         <p className={loginError?'p-login-error':'p-login'}>{serverDown ? 'Server down' : `"Wrong credentials" ${duplicateEmail ? '. Email already exists.' : ''}`}</p>
         <button onClick={handleRegistration}>{!loading ? "Register" : <Spinner />}</button>

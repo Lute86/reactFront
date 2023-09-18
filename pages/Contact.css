@@ -1,74 +1,71 @@
-.registration-container {
+.contact-form-container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 80vh;
   margin-bottom: 5rem;
-  margin-top: 2rem; 
+  margin-top: 4rem; 
 }
 
-.registration-form {
-  min-width: 40%;
+.contact-form {
+  width: 40%;
   background-color: #e0dddd;
   padding: 2rem;
   border-radius: 10px;
   /* box-shadow: 12px 12px 10px rgba(0, 0, 0, 0.315); */
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.315);
- 
 }
 
-.registration-form h1 {
+.contact-form h1 {
   font-size: 24px;
   margin-bottom: 20px;
   text-align: center;
 }
 
-.registration-form label {
+.contact-form div {
+  margin-bottom: 20px;
+}
+
+.contact-form label {
   display: block;
   margin-bottom: 8px;
   font-weight: bold;
 }
 
-.registration-form input[type="text"],
-.registration-form input[type="email"],
-.registration-form input[type="password"] {
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form select,
+.contact-form textarea {
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 16px;
   outline: none;
-  margin-bottom: 1rem;
 }
 
-.label-fail {
-  color: red;
+.contact-form select {
+  height: 40px;
 }
 
-.registration-form button {
+.contact-form textarea {
+  height: 100px;
+}
+
+.contact-form button {
   background-color: #007bff;
   color: white;
   border: none;
   border-radius: 5px;
   padding: 0.5rem 1rem;
   cursor: pointer;
-  margin: -0.5rem 0 1rem auto; /* Center the button horizontally and add margin to control spacing */
+  margin: 1rem auto; /* Center the button horizontally and add margin to control spacing */
   display: block; /* Ensure the button takes up full width */
   width: 100%;
 }
 
-.registration-form button:hover {
+.contact-form button:hover {
   background-color: #0056b3;
-}
-
-.registration-form a {
-  text-decoration: none;
-  color: #007bff;
-  transition: color 0.2s;
-}
-
-.registration-form a:hover {
-  color: #0056b3;
 }
 
 .p-login-error {
@@ -88,9 +85,8 @@
   color: red;
 }
 
-@media screen and (max-width: 786) {
-  
-  .registration-form{
-    width: 80%;
+@media screen and (max-width: 786px) {
+  .contact-form{
+    width: 90%;
   }
 }
