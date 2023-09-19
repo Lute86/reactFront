@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useGlobalState } from "../context";
-import CourseCard from "../components/CourseCard"; // Make sure to adjust the import path
+import CourseCard from "../components/CourseCard";
 import "../index.css";
 import axios from "axios";
 import Spinner from "../components/Spinner";
+import Modal from "../components/Modal";
+import SingleCourse from "../components/SingleCourse";
 
 function Courses() {
   const { serverDown, setServerDown, loading, setLoading } = useGlobalState();
   const [courses, setCourses] = useState(null);
   const [option, setOption] = useState(""); // State to track the selected option
+  const [modalId, setModalId] = useState(null)
+  const [modalOpen, setModalOpen] = useState(false)
 
   async function getCourses() {
     setLoading(true)
@@ -35,6 +39,12 @@ function Courses() {
           (course) => course.modality.toLowerCase() === option.toLowerCase()
         )
     : null;
+
+  const handleCourseClick = (id) => {
+    console.log("id", id)
+    setModalId(id)
+    setModalOpen(true)
+  }
 
   return (
     <div className="courses-body">
@@ -64,11 +74,14 @@ function Courses() {
         ) : filteredCourses ? (
           <div className="courseList">
             {filteredCourses.map((course) => (
-              <CourseCard key={course.id} course={course} />
+              <CourseCard key={course.id} course={course} onClick={() => handleCourseClick(course.id)} />
             ))}
           </div>
         ) : <p>No courses found</p>} 
       </div>
+      {modalOpen && (<Modal onClose={()=>setModalOpen(false)}>
+              <SingleCourse id={modalId}/>
+        </Modal>)}
     </div>
   );
 }

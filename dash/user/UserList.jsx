@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import ListTable from "../components/ListTable";
+import ListTable from "../../components/ListTable";
 import './UserList.css'
-import { useGlobalState } from '../context'
-import ListUnique from "../components/ListUnique";
+import { useGlobalState } from '../../context'
+import ListUnique from "../../components/ListUnique";
 
 const UserList = () => {
   const [myUser, setMyUser] = useState([]);
@@ -32,12 +32,12 @@ const UserList = () => {
   const deleteUser = () => {
     // Implement delete functionality here
     //console.log(myUser)
-    console.log(`Deleting course with ID: ${userInfo.id}`);
+    console.log(`Deleting user with ID: ${userInfo.id}`);
   };
 
   const editUser = () => {
     // Implement edit functionality here
-    console.log(`Editing course with ID: ${userInfo.id}`);
+    console.log(`Editing user with ID: ${userInfo.id}`);
   };
 
   return (

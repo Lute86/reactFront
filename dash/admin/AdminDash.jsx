@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useGlobalState } from "../context";
+import { useGlobalState } from "../../context";
 import axios from "axios";
 import './AdminDash.css'
-import Spinner from "../components/Spinner";
+import Spinner from "../../components/Spinner";
 
 function AdminDash() {
   const { isLoggedIn, userRole, userInfo } = useGlobalState();

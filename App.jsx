@@ -9,8 +9,8 @@ import Welcome from "./pages/Welcome";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import { AppContext } from "./context";
-import UserDash from "./dash/UserDash";
-import AdminDash from "./dash/AdminDash";
+import UserDash from "./dash/user/UserDash";
+import AdminDash from "./dash/admin/AdminDash";
 import Courses from "./pages/Courses";
 import ContactForm from "./pages/Contact";
 

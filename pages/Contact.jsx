@@ -115,9 +115,9 @@ function ContactForm() {
                 value={reason}
                 onChange={(e) => setReason(e.target.value)}
               >
-                <option value="payment">Payment</option>
-                <option value="enrollment">Enrollment</option>
                 <option value="course">Course</option>
+                <option value="enrollment">Enrollment</option>
+                <option value="payment">Payment</option>
                 <option value="other">Other</option>
               </select>
             </div>

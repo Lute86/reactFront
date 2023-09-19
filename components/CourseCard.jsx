@@ -5,7 +5,7 @@ import image from "../assets/react.svg";
 import { useGlobalState } from "../context";
 import axios from "axios";
 
-function CourseCard({ course }) {
+function CourseCard({ course, onClick }) {
   const { userRole, userInfo } = useGlobalState();
 
   const addCourse = async (userInfo, id) => {
@@ -30,15 +30,15 @@ function CourseCard({ course }) {
           src={image} /* Assuming you have an 'image' prop */
           alt="Course"
           className="courseImage"
+          onClick={onClick}
         />
 
         <div className="courseDetails">
-          <h2 className="courseName">{course.course_name}</h2>
-          <div className="courseModalityDuration">
+          <h2 className="courseName" onClick={onClick}>{course.course_name}</h2>
+          <div className="courseModalityDuration" onClick={onClick}>
             <p className="courseModality">{course.modality}</p>
             <p className="courseDuration">{course.duration}</p>
           </div>
-          {/* <p className='courseDescription'>{course.description}</p> */}
           {userRole == "user" && (
             <div className="courseCard__icons">
               <FaRegBookmark

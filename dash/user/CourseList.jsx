@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./CourseList.css";
-import { useGlobalState } from "../context";
+import { useGlobalState } from "../../context";
 
 const CoursesList = () => {
   const [courses, setCourses] = useState([]);
