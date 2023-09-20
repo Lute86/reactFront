@@ -85,7 +85,7 @@ function ContactForm() {
           <div className="contact-form">
             <h1>Contact Us</h1>
             <div>
-              <label for="name" className={`${handleInputs("name") ? "label-fail" : ""}`}>
+              <label htmlFor="name" className={`${handleInputs("name") ? "label-fail" : ""}`}>
                 Name:
               </label>
               <input
@@ -97,7 +97,7 @@ function ContactForm() {
               />
             </div>
             <div>
-              <label for="email" className={`${handleInputs("email") ? "label-fail" : ""}`}>
+              <label htmlFor="email" className={`${handleInputs("email") ? "label-fail" : ""}`}>
                 Email:
               </label>
               <input
@@ -109,7 +109,7 @@ function ContactForm() {
               />
             </div>
             <div>
-              <label for="reason">Reason for Contact:</label>
+              <label htmlFor="reason">Reason for Contact:</label>
               <select
                 id="reason"
                 value={reason}
@@ -122,7 +122,7 @@ function ContactForm() {
               </select>
             </div>
             <div>
-              <label for="description"
+              <label htmlFor="description"
                 className={`${handleInputs("description") ? "label-fail" : ""}`}
               >
                 Description:

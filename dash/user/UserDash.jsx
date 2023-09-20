@@ -6,35 +6,18 @@ import UserList from "./UserList";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import useLogout from "../../hooks/useLogout";
+import UpdateUser from "./updateUser";
+import Modal from "./Modal";
+
 
 function UserDash() {
-  const { setIsLoggedIn, setUserRole, userInfo, setUserInfo } =
+  const { setIsLoggedIn, setUserRole, userInfo, setUserInfo, modalOpen, setModalOpen } =
     useGlobalState();
   const [subscription, setSubscription] = useState(false);
   const navigate = useNavigate();
-  const { logout, isLoggingOut } = useLogout(); // Call the custom hook
-
-  const handleSubscription = async () => {
-    if (!userInfo.subscribed) {
-      const response = await axios.put(
-        "http://localhost:4001/user/my/subscription/" + userInfo.id,
-        {},
-        { withCredentials: true }
-      );
-      //setUserInfo(userInfo.subscribed=true)
-      setSubscription(true);
-      return console.log("Subscribed");
-    } else {
-      const response = await axios.put(
-        "http://localhost:4001/user/my/unsubscription/" + userInfo.id,
-        {},
-        { withCredentials: true }
-      );
-      //setUserInfo(userInfo.subscribed=false)
-      setSubscription(false);
-      return console.log("Unsubscribed");
-    }
-  };
+  const { logout, isLoggingOut } = useLogout();
+  const [choice, setChoice] = useState('');
+  
 
   useEffect(() => {
     async function pingUser() {
@@ -55,7 +38,7 @@ function UserDash() {
         console.log("error", error.code);
         if (error.code === "ERR_NETWORK") {
           console.error(
-            "Server is not reachable. Make sure your backend server is running."
+            "Server is not reachable. Make sure the server is running."
           );
         }
         // Handle any errors that occur during the ping request
@@ -70,37 +53,37 @@ function UserDash() {
     pingUser();
   }, [userInfo.id, navigate]);
 
+  const handleChoice = (option) => {
+    if (option=="profile"){
+      setChoice(userInfo)
+    }
+    else if(option == "courses"){
+      setChoice('courses')
+    }
+    else if(option == "subscription"){
+      setChoice('subscription')
+    }else return console.log('Choose')
+    setModalOpen(true)
+  }
+
+
   return (
     <div className="user-main-container">
       <div className="user-greet-container">
         <p className="p-user-greet">Welcome {userInfo.first_name}</p>
       </div>
-      {/* {userInfo.subscribed && (
-        <button className="subscribe-button" onClick={handleSubscription}>
-          Unsubscribe
-        </button>
-      )} */}
-      {/* {!userInfo.subscribed && (
-        <button className="subscribe-button" onClick={handleSubscription}>
-          Subscribe
-        </button>
-      )} */}
-      {/* <UserList />
-      <CourseList /> */}
       <div className="user-container">
-        <div className="user-profile-container">
-          <h3>My</h3>
+        <div className="user-profile-container" onClick={()=>handleChoice('profile')}>
           <h3>Profile</h3>
         </div>
-        <div className="user-course-container">
-        <h3>My</h3>
-        <h3>Courses</h3>
+        <div className="user-course-container" onClick={()=>handleChoice('courses')}>
+          <h3>Courses</h3>
         </div>
-        <div className="user-subscription-container">
-        <h3>My</h3>
-        <h3>Subscription</h3>
+        <div className="user-subscription-container" onClick={()=>handleChoice('subscription')}>
+          <h3>Subscription</h3>
         </div>
       </div>
+      {modalOpen && (<Modal choice={choice}/>)}
     </div>
   );
 }
