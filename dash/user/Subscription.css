@@ -1,0 +1,54 @@
+.user-subscribded-container{
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+  width: 40vh;
+}
+
+.user-subscribed-container hr{
+  margin-bottom: 15px;
+}
+.user-subscribed-container h3{
+  margin-top: 1rem;
+  font-size: x-large;
+}
+.user-subscribed-container button{
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  margin: 0 auto; 
+  margin-bottom: 1rem;
+  width: 90%;
+  align-self: center;
+}
+
+.user-subscribded-container button:hover {
+  background-color: #0056b3;
+}
+
+.user-subscribed-content{
+  /* height: 10vh; */
+  width: 40vw;
+  margin: 2rem;
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.user-subscribed-content div{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.user-subscribed-content span{
+  font-weight: bold;
+}
+
+.wish-to-cancel{
+  align-self: center;
+  font-weight: bold;
+}

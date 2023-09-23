@@ -13,7 +13,7 @@ function Footer() {
     <footer className="footer">
       <div className="footer-content">
         <div className="footer-column">
-          <p className="p-footer-logo">Commurse</p>
+          <p className="p-footer-logo">N.O.C.</p>
         </div>
         <div className="footer-column">
           <ul className="footer-links">
@@ -36,7 +36,7 @@ function Footer() {
         </div>
       </div>
       <div className="footer-copyright">
-        Commurse&copy; 2023 . All rights reserved.
+        N.O.C.&copy; 2023 . All rights reserved.
       </div>
     </footer>
   );

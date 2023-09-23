@@ -23,7 +23,7 @@ function Navbar() {
 
 	return (
 		<header>
-			<h3>Commurse</h3>
+			<h3>N.O.C.</h3>
 			<nav ref={navRef}>
 				<Link to="/" onClick={closeNavbar}>Home</Link>
 				<Link to="/courses" onClick={closeNavbar}>Courses</Link>

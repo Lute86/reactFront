@@ -1,9 +1,32 @@
+.list-user-course-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow-y: auto;
+  max-height: 60vh;
+  width: 100%;
+}
+
+.scrollable-table {
+  max-height: 100%; /* Adjust the max-height as needed */
+  overflow-y: auto;
+  width: 100%;
+
+}
+
 .list-user-course {
   width: 100%;
   border-collapse: collapse;
   margin: 1rem 0;
   font-size: 14px;
+  
 }
+
+/* ... Rest of your CSS */
+
+
+
 
 .list-user-course th,
 .list-user-course td {
@@ -21,10 +44,14 @@
 }
 
 .list-user-course button {
-  background: none;
-  border: none;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-size: 16px;
   cursor: pointer;
-}
+  margin-top: 10px;
+  width: 100%;}
 
 .list-user-course button:hover {
   color: #007bff;

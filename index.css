@@ -33,27 +33,7 @@ h1, h2{
 
 }
 
-/* Loading */
 
-.loading-spinner {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto;
-}
-
-.spinner {
-  animation: spin 1s linear infinite; /* Apply a spinning animation */
-}
-
-@keyframes spin {
-  from {
-    transform: rotate(0deg); /* Starting rotation angle */
-  }
-  to {
-    transform: rotate(360deg); /* Ending rotation angle */
-  }
-}
 
 
 

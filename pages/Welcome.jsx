@@ -13,7 +13,7 @@ function Welcome() {
     <div className="welcome-container">
       <section className="background-section">
         <div className="bg-section-content">
-          <h1 className="bg-img-title">Welcome to Commurse</h1>
+          <h1 className="bg-img-title">Welcome to N.O.C.</h1>
           <p className="bg-img-subtitle">Discover a world of opportunities</p>
         </div>
       </section>

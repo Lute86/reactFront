@@ -18,13 +18,18 @@
 
 .update-user-form h1 {
   font-size: 24px;
-  margin-bottom: 20px;
   text-align: center;
 }
-
+.update-user-form hr {
+  margin-bottom: 10px;
+}
 .update-user-form label {
   display: block;
   margin-bottom: 8px;
+  /* font-weight: bold; */
+  text-align: left;
+}
+.update-user-form span {
   font-weight: bold;
 }
 
@@ -66,18 +71,22 @@
   color: #0056b3;
 }
 
+
 .update-user-login-error {
+  display: block;
   color: red;
 }
 
 .update-user-login {
-  font-size: 14px;
-  text-align: center;
-  margin-top: 10px;
+  display: none;
 }
 
 .update-user-label-edit {
   color: rgb(7, 151, 7);
+}
+
+.display{
+  display: block;
 }
 
 @media screen and (max-width: 786) {

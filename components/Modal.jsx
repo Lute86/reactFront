@@ -7,7 +7,7 @@ function Modal({ children, onClose }) {
       <div className="modal-background" onClick={onClose}></div>
       <div className="modal-content">
         {children}
-        <button>Close</button>
+        <button onClick={onClose}>Close</button>
       </div>
     </div>
   );

@@ -6,7 +6,7 @@ import Spinner from "../../components/Spinner";
 import axios from "axios";
 import { FaBackspace, FaEdit } from "react-icons/fa";
 
-const UpdateUser = ({ choice }) => {
+const UpdateUser = ({ user }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -33,9 +33,9 @@ const UpdateUser = ({ choice }) => {
   } = useGlobalState();
   const [duplicateEmail, setDuplicateEmail] = useState(false);
   const [updatedUser, setUpdatedUser] = useState({
-    first_name: choice.first_name,
-    last_name: choice.last_name,
-    email: choice.email,
+    first_name: user.first_name,
+    last_name: user.last_name,
+    email: user.email,
     password: password,
     new_password: newPassword,
   });
@@ -55,9 +55,9 @@ const UpdateUser = ({ choice }) => {
     
     try {
       const newUser = {
-        first_name: firstName || choice.first_name,
-        last_name: lastName || choice.last_name,
-        email: email || choice.email,
+        first_name: firstName || user.first_name,
+        last_name: lastName || user.last_name,
+        email: email || user.email,
         password: password,
       };
       if(newPassword) newUser.new_password = newPassword;
@@ -113,13 +113,14 @@ const UpdateUser = ({ choice }) => {
   return (
     <div className="update-user-container">
       <div className="update-user-form">
-        <h1>Update profile</h1>
+        <h1>My profile</h1>
+        <hr/>
         <div>
           <label
             htmlFor="name"
             className={`${handleInputs("first_name")?"update-user-login-error":""} ${editableFields.firstName ? "update-user-label-edit" : ""}`}
           >
-            First Name: {!editableFields.firstName && <span>{choice.first_name}</span>} {!editableFields.firstName &&<FaEdit onClick={() => toggleEditableField("firstName")}/>}{editableFields.firstName &&<FaBackspace onClick={() =>{ toggleEditableField("firstName")
+            First Name: {!editableFields.firstName && <span>{user.first_name}</span>} {!editableFields.firstName &&<FaEdit onClick={() => toggleEditableField("firstName")}/>}{editableFields.firstName &&<FaBackspace onClick={() =>{ toggleEditableField("firstName")
             setFirstName('')
           }}/>}
           </label>
@@ -139,7 +140,7 @@ const UpdateUser = ({ choice }) => {
             htmlFor="last"
             className={`${editableFields.lastName ? "update-user-label-edit" : ""}`}
           >
-            Last Name: {!editableFields.lastName && <span>{choice.last_name}</span>} {!editableFields.lastName &&<FaEdit onClick={() => toggleEditableField("lastName")}/>}{editableFields.lastName &&<FaBackspace onClick={() => {
+            Last Name: {!editableFields.lastName && <span>{user.last_name}</span>} {!editableFields.lastName &&<FaEdit onClick={() => toggleEditableField("lastName")}/>}{editableFields.lastName &&<FaBackspace onClick={() => {
               toggleEditableField("lastName")
               setLastName('')
           }}/>}
@@ -158,7 +159,7 @@ const UpdateUser = ({ choice }) => {
             htmlFor="email"
             className={`${editableFields.email ? "update-user-label-edit" : ""}`}
           >
-            Email: {!editableFields.email && <span>{choice.email}</span>} {!editableFields.email &&<FaEdit onClick={() => toggleEditableField("email")}/>}{editableFields.email &&<FaBackspace onClick={() => {
+            Email: {!editableFields.email && <span>{user.email}</span>} {!editableFields.email &&<FaEdit onClick={() => toggleEditableField("email")}/>}{editableFields.email &&<FaBackspace onClick={() => {
               setEmail('')
               toggleEditableField("email")}}/>}
           </label>
@@ -177,36 +178,32 @@ const UpdateUser = ({ choice }) => {
             htmlFor="password"
             className={`${handleInputs("password")?"update-user-login-error":""} ${editableFields.password ? "update-user-label-edit" : ""}`}
           >
-            Password: {!editableFields.password && (<FaEdit onClick={() => toggleEditableField("password")}/>)} {editableFields.password && <FaBackspace onClick={() =>{
-             setPassword('')
-             setNewPassword('')
-             toggleEditableField("password")}}/>}
+            Password: 
           </label>
-          {editableFields.password ? (
-            <>
+            
               <input
                 id="password"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Write current Password"
-              />
-              <label htmlFor="newPassword" className={`${handleInputs("first_name")?"update-user-login-error":""}`} >New Password:</label>
-              <input
+              /></div>
+              <label htmlFor="newPassword" className={`${handleInputs("new_password")?"update-user-login-error":""}`} >New Password: (optional) {!editableFields.newPassword && (<FaEdit onClick={() => toggleEditableField("newPassword")}/>)} {editableFields.newPassword && <FaBackspace onClick={() =>{
+                setNewPassword('')
+             toggleEditableField("newPassword")}}/>}
+             </label>
+              <div>
+             {editableFields.newPassword && (<input
                 id="newPassword"
                 type="password"
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
                 placeholder="Optional"
                 min="6"
-              />
-            </>
-          ) : (
-            <span>********</span>
-          )}
+              />)}
         </div>
         <div>
-          <label>Subscribed: {choice.subscribed?"Yes":"No"}</label>
+          <label>Subscribed: {user.subscribed?"Yes":"No"}</label>
         </div>
         <p className={loginError ? "update-user-login-error" : "update-user-login"}>
           {serverDown

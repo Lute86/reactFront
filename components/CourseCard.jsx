@@ -41,10 +41,10 @@ function CourseCard({ course, onClick }) {
           </div>
           {userRole == "user" && (
             <div className="courseCard__icons">
-              <FaRegBookmark
+              {userInfo.subscribed && (<FaRegBookmark
                 className="courseCard__wishlist"
                 onClick={() => addCourse(userInfo, course.id)}
-              />
+              />)}
               <FaFireAlt className="courseCard__fastSelling" />
             </div>
           )}
