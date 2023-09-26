@@ -1,32 +1,34 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useGlobalState } from '../../context';
 import "./Subscription.css";
 import PaymentForm from './CreditCard';
+import axios from 'axios';
+
 
 function Subscription() {
-  const { setModalOpen, userInfo } = useGlobalState();
+  const { setModalOpen, userInfo, APIURL, pingUser, changeHappened, setChangeHappened } = useGlobalState();
   const [toggleSub, setToggleSub] = useState(false);
+  
+  useEffect(()=>{
+    pingUser()
+    //console.log(userInfo.subscribed)
+  },[changeHappened])
+  
+  
+
   const handleSubscription = async () => {
-    if (!userInfo.subscribed) {
-      const response = await axios.put(
-        "http://localhost:4001/user/my/subscription/" + userInfo.id,
+    
+      const response = await axios.put(APIURL+
+        "user/my/unsubscription/" + userInfo.id,
         {},
         { withCredentials: true }
       );
-      //setUserInfo(userInfo.subscribed=true)
-      setSubscription(true);
-      return console.log("Subscribed");
-    } else {
-      const response = await axios.put(
-        "http://localhost:4001/user/my/unsubscription/" + userInfo.id,
-        {},
-        { withCredentials: true }
-      );
-      //setUserInfo(userInfo.subscribed=false)
-      setSubscription(false);
-      return console.log("Unsubscribed");
-    }
+      console.log("Unsubscribed");
+      setChangeHappened(!changeHappened)
+      return 
+    
   };
+
 
   return (
     <div className='user-subscribed-container'>
@@ -41,7 +43,7 @@ function Subscription() {
         <div className='wish-to-cancel'>
           Wish to cancel? 
         </div>
-          <button className='user-unsubscribe-button'>Unsubscribe</button>
+          <button className='user-unsubscribe-button' onClick={handleSubscription}>Unsubscribe</button>
       </div>)}
       {!userInfo.subscribed && !toggleSub && (<div className='user-subscribed-content'>
         <div>Subscription price: <span>$99</span></div>
@@ -52,7 +54,7 @@ function Subscription() {
         </div>
           <button className='user-unsubscribe-button' onClick={()=>setToggleSub(true)}>Subscribe</button>
       </div>)}
-      {!userInfo.subscribed && toggleSub && <PaymentForm />}
+      {!userInfo.subscribed && toggleSub && <PaymentForm toggle={()=>setToggleSub(false)} />}
       <button onClick={()=>setModalOpen(false)}>Close</button>
     </div>
   )

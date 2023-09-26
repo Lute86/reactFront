@@ -3,48 +3,85 @@ import { useGlobalState } from "../../context";
 import axios from "axios";
 import './AdminDash.css'
 import Spinner from "../../components/Spinner";
+import AllUsers from "./AllUsers";
+import { useNavigate } from "react-router-dom";
+import Modal from "../../components/Modal";
+import AllCourses from "./AllCourses";
+
 
 function AdminDash() {
-  const { isLoggedIn, userRole, userInfo } = useGlobalState();
-  const [allUsers, setAllUsers] = useState(null);
-
-  async function getAllUsers() {
-    try {
-      const response = await axios.get("http://localhost:4001/admin/user/all", {
-        withCredentials: true,
-      });
-      setAllUsers(response.data);
-    } catch (error) {
-      console.error("Fetch users error", error);
+  const { isLoggedIn, userRole, userInfo, setUserInfo, setIsLoggedIn, setUserRole } = useGlobalState();
+  const [choice, setChoice] = useState('')
+  const navigate = useNavigate();
+  
+  
+  useEffect(() => {
+    async function pingUser() {
+      try {
+        const response = await axios.get(
+          "http://localhost:4001/admin/my/status/" + userInfo.id,
+          { withCredentials: true }
+        );
+        //console.log("Data", response.data);
+        if (response.status === 200) {
+          console.log("User is authenticated");
+          setUserInfo(response.data);
+        } else {
+          console.log("User is not authenticated, redirecting to /login");
+          navigate("/login");
+        }
+      } catch (error) {
+        console.log("error", error.code);
+        if (error.code === "ERR_NETWORK") {
+          console.error(
+            "Server is not reachable. Make sure the server is running."
+          );
+        }
+        // Handle any errors that occur during the ping request
+        console.error("Error checking authentication status:", error);
+        navigate("/login");
+        setUserInfo(null);
+        setIsLoggedIn(false);
+        setUserRole("");
+      }
     }
+
+    pingUser();
+  }, [navigate]);
+
+
+
+  const handleChoice = (option) => {
+    if (option=="profile"){
+      setChoice("profile")
+    }
+    else if(option == "courses"){
+      setChoice('courses')
+    }
+    else if(option == "queries"){
+      setChoice('queries')
+    }else return console.log('Choose')
   }
 
-  useEffect(() => {
-    getAllUsers();
-  }, []);
 
   return (
-    <div className="admin-container">
-      {/* {userInfo && <div>AdminDash {userInfo.first_name}</div>}{" "} */}
-      <div className="admin-content">
-        <h2>All users</h2>
-        {allUsers ? (
-          <ul>
-            {allUsers.map((user) => (
-              <li key={user.id}>
-                {user.first_name}
-
-                <>
-                  <button>Update</button>
-                  <button>Delete</button>
-                </>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <Spinner />
-        )}
+    <div className="admin-main-container">
+      <div className="admin-greet-container">
+        <p className="p-admin-greet">Welcome {userInfo.first_name}!</p>
       </div>
+      <div className="admin-container">
+        <div className="admin-profile-container" onClick={()=>handleChoice('profile')}>
+          <h3>Users</h3>
+        </div>
+        <div className="admin-course-container" onClick={()=>handleChoice('courses')}>
+          <h3>Courses</h3>
+        </div>
+        <div className="admin-subscription-container" onClick={()=>handleChoice('queries')}>
+          <h3>Queries</h3>
+        </div>
+      </div>
+      {choice == 'profile' && (<AllUsers choice={()=>setChoice('')}/>)}
+      {choice == 'courses' && (<AllCourses choice={()=>setChoice('')}/>)}
     </div>
   );
 }

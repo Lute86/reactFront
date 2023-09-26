@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FaShoppingCart, FaRegBookmark, FaFireAlt } from "react-icons/fa";
 import "./CourseCard.css";
 import image from "../assets/react.svg";
@@ -6,7 +6,8 @@ import { useGlobalState } from "../context";
 import axios from "axios";
 
 function CourseCard({ course, onClick }) {
-  const { userRole, userInfo } = useGlobalState();
+  const { userRole, userInfo, pingUser} = useGlobalState();
+
 
   const addCourse = async (userInfo, id) => {
     console.log(userInfo.id);
@@ -43,11 +44,26 @@ function CourseCard({ course, onClick }) {
             <div className="courseCard__icons">
               {userInfo.subscribed && (<FaRegBookmark
                 className="courseCard__wishlist"
-                onClick={() => addCourse(userInfo, course.id)}
+                onClick={() => {
+                  pingUser();
+                  addCourse(userInfo, course.id)
+                }}
               />)}
               <FaFireAlt className="courseCard__fastSelling" />
             </div>
           )}
+          {/* {userRole == "admin" && (
+            <div className="courseCard__icons">
+              <FaRegBookmark
+                className="courseCard__wishlist"
+                onClick={() => {
+                  pingUser();
+                  addCourse(userInfo, course.id)
+                }}
+              />
+              <FaFireAlt className="courseCard__fastSelling" />
+            </div>
+          )} */}
         </div>
       </div>
     </div>

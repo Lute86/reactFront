@@ -30,12 +30,18 @@ function useLogout() {
       localStorage.removeItem("isLoggedIn");
       localStorage.removeItem("userRole");
       localStorage.removeItem("userInfo");
-
+      
       // Redirect to the login page after logout
       navigate("/login"); 
     } catch (error) {
       console.error("Logout error", error);
       setIsLoggingOut(false);
+      setIsLoggedIn(false);
+      setUserRole("");
+      setUserInfo(null);
+      localStorage.removeItem("isLoggedIn");
+      localStorage.removeItem("userRole");
+      localStorage.removeItem("userInfo");
     }
   };
 

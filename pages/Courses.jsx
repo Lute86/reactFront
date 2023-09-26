@@ -6,13 +6,19 @@ import axios from "axios";
 import Spinner from "../components/Spinner";
 import Modal from "../components/Modal";
 import SingleCourse from "../components/SingleCourse";
+import { useNavigate } from "react-router-dom";
+
 
 function Courses() {
-  const { serverDown, setServerDown, loading, setLoading } = useGlobalState();
+  const { serverDown, setServerDown, loading, setLoading, pingUser, userInfo } = useGlobalState();
   const [courses, setCourses] = useState(null);
   const [option, setOption] = useState(""); // State to track the selected option
   const [modalId, setModalId] = useState(null)
   const [modalOpen, setModalOpen] = useState(false)
+
+
+  const navigate = useNavigate();
+  
 
   async function getCourses() {
     setLoading(true)
@@ -29,7 +35,8 @@ function Courses() {
   useEffect(() => {
     setServerDown(false);
     getCourses();
-  }, []);
+    //ping user hook
+  }, [userInfo?.subscribed]);
 
   // Filter courses based on the selected option
   const filteredCourses = courses
@@ -45,7 +52,6 @@ function Courses() {
     setModalId(id)
     setModalOpen(true)
   }
-
   return (
     <div className="courses-body">
       <h2>Courses</h2>

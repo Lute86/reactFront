@@ -1,0 +1,134 @@
+.all-users-list-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.75); /* Semi-transparent background */
+  display: flex;
+  flex-direction: column; /* Changed to column to center vertically */
+  justify-content: center;
+  align-items: center;
+  z-index: 900;
+  backdrop-filter: blur(5px); /* Add a blur effect to the background */
+}
+
+
+.no-data-container{
+  height: 40vh;
+  background-color: #fff;
+  width: 30vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.no-data-title{
+  height: 40%;
+  justify-self: flex-start;
+  font-size: 2rem;
+}
+.no-data-container hr{
+  width: 100%;
+}
+.no-data-container p{
+  font-size: 2rem;
+}
+.no-data-container .no-data-button-close{
+  display: flex;
+  margin-top: 2rem;
+  width: 70%;
+  justify-content: center;
+  align-items: center;
+}
+
+.all-users-list-container {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+  background-color: #fff;
+  font-size: 10px;
+  height: 60vh;
+  border-radius: 5px; /* Add rounded corners to the container */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add a subtle shadow to the container */
+  overflow-y: auto;
+}
+
+.all-users-list-content {
+  /* height: 60vh; */
+  width: 100%;
+  background-color: transparent; /* Set content background to transparent */
+  color: black;
+  padding: 20px;
+  max-height: 60%; /* Adjust the max-height as needed */
+  overflow-y: auto;
+  /* border-collapse: collapse; */
+
+}
+
+
+.all-users-list-container button {
+  display: flex;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  /* width: 100%; */
+}
+
+.all-users-list-container .button-close-listusers{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  align-self: center;
+}
+
+.all-users-list-container button:hover {
+  background-color: #0056b3;
+}
+
+
+/* Add alternate row colors */
+.all-users-list-content tbody tr:nth-child(even) {
+  background-color: #cdcccc; /* Light grey background for even rows */
+}
+
+/* White background for odd rows */
+.all-users-list-content tbody tr:nth-child(odd) {
+  background-color: #ffffff;
+}
+
+.all-users-list-content th, .all-users-list-content td {
+  /* ... Your existing styles ... */
+
+  /* Add border styles for table cells (th and td) */
+  border: 1px solid #cbcaca; /* Use your desired border color here */
+}
+
+/* Add border styles for table header cells (th) */
+.all-users-list-content th {
+  /* ... Your existing styles ... */
+
+  /* Add border styles for table header cells (th) */
+  border: 1px solid #cdcecf; /* Use your desired border color here */
+}
+
+
+
+@media screen and (max-width: 786px) {
+  .all-users-list-container{
+    width: 90%;
+  }
+  .all-users-list-content{
+    overflow-y: auto;
+    overflow-x: auto;
+  }
+}

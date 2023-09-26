@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useGlobalState } from "../context";
 import { Link } from "react-router-dom";
 import "./Welcome.css"; // Import your Welcome component's CSS
@@ -7,7 +7,11 @@ import aboutImg from "../assets/high-five-sm.jpg";
 import companies from "../companies";
 
 function Welcome() {
-  const { isLoggedIn, userInfo } = useGlobalState();
+  const { pingUser, userInfo } = useGlobalState();
+
+  // useEffect(()=>{
+  //   pingUser();
+  // },[userInfo.id])
 
   return (
     <div className="welcome-container">

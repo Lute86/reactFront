@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useGlobalState } from "../../context";
 import "./UserDash.css";
-import CourseList from "./CourseList";
-import UserList from "./UserList";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import useLogout from "../../hooks/useLogout";
-import UpdateUser from "./updateUser";
 import Modal from "./Modal";
 
 
