@@ -19,6 +19,7 @@ const AppProvider = ({children}) => {
   const [loading, setLoading] = useState(false)
   const [modalOpen, setModalOpen] = useState(false)
   const [allUsers, setAllUsers] = useState([]);
+  const [allQueries, setAllQueries] = useState([]);
 
   const [changeHappened, setChangeHappened] = useState(Boolean)
   const APIURL = 'http://localhost:4001/'
@@ -62,7 +63,8 @@ const AppProvider = ({children}) => {
     modalOpen, setModalOpen,
     APIURL, pingUser,
     changeHappened, setChangeHappened,
-    allUsers, setAllUsers
+    allUsers, setAllUsers,
+    allQueries, setAllQueries
     }} >
       {children}
   </AppContext.Provider>

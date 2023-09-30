@@ -30,10 +30,6 @@ const AllUsersFetch = ({choice}) => {
 
   return (
     <div className="allusers-modal">
-      {/* <div className="allusers-modal-content">
-
-        <div>Hola</div>
-      </div> */}
       {allUsers && (<><h2>Profile</h2>
       <ListUsers change={setAllUsersChanged} choice={choice}/></>)}
     </div>

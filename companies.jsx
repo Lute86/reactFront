@@ -1,14 +1,55 @@
+
 const companies = [
-  { name: "EduTech Solutions", image: "/images/company-logos/company1.png" },
-  { name: "SkillUp Innovations", image: "/images/company-logos/company2.png" },
-  { name: "LearnFlex Enterprises", image: "/images/company-logos/company3.png" },
-  { name: "GrowthMasters Inc.", image: "/images/company-logos/company4.png" },
-  { name: "TechLearn Labs", image: "/images/company-logos/company5.png" },
-  { name: "DevPath Academy", image: "/images/company-logos/company6.png" },
-  { name: "LearnWave Corp.", image: "/images/company-logos/company7.png" },
-  { name: "FutureSkills Co.", image: "/images/company-logos/company8.png" },
-  { name: "KnowledgeForge Ltd.", image: "/images/company-logos/company9.png" },
-  { name: "InnoEd Ventures", image: "/images/company-logos/company10.png" },
+  {
+    name: "EduTech Solutions",
+    slogan: "Empowering Education through Technology",
+    image: "/src/assets/edutech.png"
+  },
+  {
+    name: "SkillUp Innovations",
+    slogan: "Innovate. Elevate. Skill Up.",
+    image: "/src/assets/skillup.png"
+  },
+  {
+    name: "LearnFlex Enterprises",
+    slogan: "Flex Your Learning Potential",
+    image: "/src/assets/learnflex.png"
+  },
+  {
+    name: "GrowthMasters Inc.",
+    slogan: "Mastering Growth, Unlocking Potential",
+    image: "/src/assets/growthmaster.png"
+  },
+  {
+    name: "TechLearn Labs",
+    slogan: "Where Technology Meets Learning",
+    image: "/src/assets/techlearn.png"
+  },
+  {
+    name: "DevPath Academy",
+    slogan: "Forge Your Path in Tech",
+    image: "/src/assets/devpath.png"
+  },
+  {
+    name: "LearnWave Corp.",
+    slogan: "Riding the Waves of Learning",
+    image: "/src/assets/learnwave.png"
+  },
+  {
+    name: "FutureSkills Co.",
+    slogan: "Building Tomorrow's Skills Today",
+    image: "/src/assets/futureskills.png"
+  },
+  {
+    name: "KnowledgeForge Ltd.",
+    slogan: "Forging Knowledge, Shaping Futures",
+    image: "/src/assets/knowledgeforge.png"
+  },
+  {
+    name: "InnoEd Ventures",
+    slogan: "Venturing into Innovative Education",
+    image: "/src/assets/innoed.png"
+  }
 ];
 
 export default companies;

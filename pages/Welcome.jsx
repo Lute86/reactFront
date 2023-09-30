@@ -2,9 +2,19 @@ import React, { useEffect } from "react";
 import { useGlobalState } from "../context";
 import { Link } from "react-router-dom";
 import "./Welcome.css"; // Import your Welcome component's CSS
-import image from "../assets/react.svg";
-import aboutImg from "../assets/high-five-sm.jpg";
+// import image from "../assets/react.svg";
+import aboutImg from "../assets/high-five-long.jpg";
 import companies from "../companies";
+import edutech from "../assets/edutech.png"
+import skillup from "../assets/skillup.png"
+import devpath from "../assets/devpath.png"
+import futureskills from "../assets/futureskills.png"
+import growthmaster from "../assets/growthmaster.png"
+import innoed from "../assets/innoed.png"
+import knowledgeforge from "../assets/knowledgeforge.png"
+import learnflex from "../assets/learnflex.png"
+import learnwave from "../assets/learnwave.png"
+import techlearn from "../assets/techlearn.png"
 
 function Welcome() {
   const { pingUser, userInfo } = useGlobalState();
@@ -72,7 +82,8 @@ function Welcome() {
           </div>
         </div>
       </section>
-
+      {/* Courses section */}
+      {/* Subscription section */}
       <section className="companies-involved">
         <h2>Companies Involved</h2>
         <p className="p-companies">
@@ -83,8 +94,9 @@ function Welcome() {
         <div className="company-logos">
           {companies.map((company, index) => (
             <img
+              className="welcome-companies-img"
               key={index}
-              src={image}
+              src={company.image}
               alt={company.name}
               title={company.name}
             />

@@ -4,19 +4,24 @@ import "./ListCourses.css";
 import axios from "axios";
 import { useGlobalState } from "../../context";
 import Spinner from "../../components/Spinner";
+import EditCourse from "./EditCourse";
 
-const ListCourses = ({close}) => {
+const ListCourses = ({ close }) => {
   // Note the change from 'user' to 'users'
   const { APIURL, userInfo, loading, setLoading } = useGlobalState();
   const [allCoursesChanged, setAllCoursesChanged] = useState(false);
   const [allCourses, setAllCourses] = useState([]);
+  const [editCourse, setEditCourse] = useState(false);
+  const [courseToEdit, setCourseToEdit] = useState(false);
+
+
 
   useEffect(() => {
     async function getAllCourses() {
       //console.log(userInfo.id)
       try {
-        if (userInfo && userInfo.role == 'admin') {
-          const response = await axios.get(APIURL+"course/all", {
+        if (userInfo && userInfo.role == "admin") {
+          const response = await axios.get(APIURL + "course/all", {
             withCredentials: true,
           });
           //console.log(response.data)
@@ -25,27 +30,25 @@ const ListCourses = ({close}) => {
       } catch (error) {
         console.error("Fetch courses error", error);
       }
-      setLoading(false)
+      setLoading(false);
     }
-  
+
     getAllCourses();
   }, [allCoursesChanged]); // Include userInfo as a dependency to re-fetch when it changes
-  
 
   const handleDelete = async (id) => {
-    
     // Display a confirmation dialog
     const isConfirmed = window.confirm(
-      "Are you sure you want to delete this user?"
+      "Are you sure you want to delete this course?"
     );
     // Check if the user confirmed the deletion
     if (isConfirmed) {
       try {
-        const deleteUser = await axios.delete(
+        const deleteCourse = await axios.delete(
           APIURL + `admin/course/delete/${id}`,
           { withCredentials: true }
         );
-        if (!deleteUser.error) {
+        if (!deleteCourse.error) {
           // User confirmed and deletion was successful
           setAllCoursesChanged(!allCoursesChanged);
         }
@@ -58,8 +61,9 @@ const ListCourses = ({close}) => {
     }
   };
 
-  const handleEdit = (id) => {
-    // Implement your edit logic here
+  const handleEdit = (course) => {
+    setCourseToEdit(course)
+    setEditCourse(true)
   };
 
   const handleContentClick = (event) => {
@@ -68,31 +72,44 @@ const ListCourses = ({close}) => {
   };
 
   const handleClose = () => {
-    setLoading(false)
-    close
-  }
+    setLoading(false);
+    close();
+  };
 
   // Check if allUsers is defined and not an empty array
   if (!Array.isArray(allCourses) || allCourses.length === 0) {
-    return (loading ? <Spinner className="spinner-listcourses"/> :( <div className="all-courses-list-modal" onClick={handleClose}>
-      <div className="no-data-container" >
-        <div className="no-data-title" onClick={handleContentClick}>
-          <h3>Courses</h3>
-          <hr />
-        </div>
-        <p onClick={handleContentClick}>No data to display</p>
+    return loading ? (
+      <Spinner className="spinner-listcourses" />
+    ) : (
+      <div className="all-courses-list-modal" onClick={handleClose}>
+        <div className="no-data-container">
+          <div className="no-data-title" onClick={handleContentClick}>
+            <h3>Courses</h3>
+            <hr />
+          </div>
+          <p onClick={handleContentClick}>No data to display</p>
 
-        <button className="no-data-button-close" onClick={handleClose}>Close</button>
+          <button className="no-data-button-close" onClick={handleClose}>
+            Close
+          </button>
+        </div>
       </div>
-    </div>))
+    );
   }
 
-  const tableHeaders = Object.keys(allCourses[0]); // Assuming all users have the same structure
+  const tableHeadersFull = Object.keys(allCourses[0]);
+  const filtros = ["deletedAt", "createdAt", "updatedAt"];
+  const tableHeaders = tableHeadersFull.filter((key) => !filtros.includes(key));
 
-  return (
-    (loading ? <Spinner className="spinner-listcourses" /> : <div className="all-courses-list-modal" onClick={handleClose}>
+  return loading ? (
+    <Spinner className="spinner-listcourses" />
+  ) : !editCourse ? (
+    <div className="all-courses-list-modal" onClick={handleClose}>
       <div className="all-courses-list-container">
-        <table className="all-courses-list-content" onClick={handleContentClick}>
+        <table
+          className="all-courses-list-content"
+          onClick={handleContentClick}
+        >
           <thead>
             <tr>
               {tableHeaders.map((header) => (
@@ -112,13 +129,16 @@ const ListCourses = ({close}) => {
                     <td key={header}>
                       {header === "teachers"
                         ? course[header].map((element) => {
-                            return element.last_name;
+                            return element.last_name+' ';
                           })
+                        : header === "start_date" || header === "finish_date"
+                        ? (course[header] ? new Date(course[header]).toLocaleDateString() : "none")
+                        : header === 'active' ? (course[header] === true ? 'Yes' : "No") 
                         : course[header]}
                     </td>
                   ))}
                   <td>
-                    <button onClick={() => handleEdit(course.id)}>
+                    <button onClick={() => handleEdit(course)}>
                       <FaEdit />
                     </button>
                   </td>
@@ -136,8 +156,8 @@ const ListCourses = ({close}) => {
           Close
         </button>
       </div>
-    </div>)
-  );
+    </div>
+  ) : <EditCourse close={()=>setEditCourse(false)} course={courseToEdit} change={()=>setAllCoursesChanged(!allCoursesChanged)} />;
 };
 
 export default ListCourses;

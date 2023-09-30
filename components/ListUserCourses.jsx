@@ -43,7 +43,7 @@ const ListUserCourses = ({ data, onDelete }) => {
           </tbody>
         </table>
       </div>
-      <button onClick={() => setModalOpen(false)}>Close</button>
+      <button className="listusercourses-close-button" onClick={() => setModalOpen(false)}>Close</button>
     </div>
   );
 };

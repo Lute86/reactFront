@@ -7,6 +7,7 @@ import AllUsers from "./AllUsers";
 import { useNavigate } from "react-router-dom";
 import Modal from "../../components/Modal";
 import AllCourses from "./AllCourses";
+import AllQueries from "./AllQueries";
 
 
 function AdminDash() {
@@ -82,6 +83,7 @@ function AdminDash() {
       </div>
       {choice == 'profile' && (<AllUsers choice={()=>setChoice('')}/>)}
       {choice == 'courses' && (<AllCourses choice={()=>setChoice('')}/>)}
+      {choice == 'queries' && (<AllQueries choice={()=>setChoice('')}/>)}
     </div>
   );
 }

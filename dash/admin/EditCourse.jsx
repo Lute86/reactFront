@@ -1,0 +1,276 @@
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import "./EditCourse.css";
+import { useGlobalState } from "../../context";
+import Spinner from "../../components/Spinner";
+import axios from "axios";
+
+const EditCourse = ({close, course, change}) => {
+  const [editedCourse, setEditedCourse] = useState({
+    course_name: course.course_name,
+    description: course.description,
+    modality: course.modality,
+    duration: course.duration,
+    price: course.price,
+    active: course.active,
+    start_date: course.start_date,
+    finish_date: course.finish_date,
+    type: course.type,
+  });
+
+  const [teacherList, setTeacherList] = useState([])
+  const [teacherId, setTeacherId] = useState();
+  const [courseTeacherId, setCourseTeacherId] = useState(course.teachers[0]?.id||null);
+  const [successMsg, setSuccessMsg] = useState(false)
+  const [failedInput, setFailedInput] = useState(new Set());
+  const navigate = useNavigate();
+  const {
+    APIURL,
+    loginError,
+    setLoginError,
+    serverDown,
+    setServerDown,
+    loading,
+    setLoading,
+    setAllCoursesChanged,
+    allCoursesChanged
+  } = useGlobalState();
+  const [duplicateEmail, setDuplicateEmail] = useState(false);
+
+  async function getTeachersList(){
+    try {
+      const response = await axios.get(APIURL+`admin/teacher/all`, {withCredentials:true})
+      setTeacherList(response.data)
+    } catch (error) {
+      console.error('Error fetching teachers list: ', error)
+    }
+  }
+  
+  async function addTeachersToCourse(id){
+    try {
+      const response = await axios.post(
+        APIURL + `admin/teacher/${teacherId}/course/${id}`,
+        {},
+        { withCredentials: true }
+      );
+      if (!response.data) throw new Error();
+    } catch (error) {
+      alert("Could't add teacher ");
+      console.error("Error: ", error);
+    }
+  }
+
+  useEffect(() => {
+    getTeachersList()
+    return () => {
+      setLoading(false);
+      setLoginError(false);
+      setServerDown(false);
+    };
+  }, []);
+
+  const handleCourseEdition = async () => {
+    setLoading(true);
+    setFailedInput([]);
+    try {
+      const response = await axios.put(
+        APIURL + "admin/course/update/"+course.id,
+        editedCourse,
+        { withCredentials: true }
+      );
+
+      if (!response.data) throw new Error();
+      if(teacherId) addTeachersToCourse(response.data.id);
+      setSuccessMsg(true);
+      setTimeout(()=>{
+        setSuccessMsg(false);
+        change();
+        close();
+      }, 1000)
+    } catch (error) {
+      console.error("Registration error", error);
+      setLoginError(true);
+
+      if (
+        error.response !== undefined &&
+        (error.response.status === 401 || error.response.data.error)
+      ) {
+        console.log("Entro credentials error");
+        if (error.response.data.error === "Validation error") {
+          console.error("Email exists");
+          setDuplicateEmail(true);
+        }
+      } else if (
+        !error.response ||
+        (error.response && error.response.status === 500)
+      ) {
+        console.log("Server error");
+        setServerDown(true);
+      } else if (
+        !error.response ||
+        (error.response && error.response.status === 400)
+      ) {
+        const paramValues = error.response.data.errors;
+        paramValues.map((element) => {
+          console.log("Wrong credentials 400", element.msg, element.param);
+          setFailedInput((prev) => new Set([...prev, element.param]));
+        });
+      }
+      setLoading(false);
+    }
+  };
+
+  const handleInputs = (value) => {
+    let valueInput = false;
+    failedInput.forEach((element) => {
+      if (element === value) {
+        valueInput = true;
+      }
+    });
+    return valueInput;
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setEditedCourse({ ...editedCourse, [name]: value });
+  };
+
+  return (
+    <div className="edit-course-container">
+      {!successMsg && <div className="edit-course-form">
+        <h1>Edit Course</h1>
+        <div>
+          <label htmlFor="courseName" className={`${handleInputs("course_name") ? "label-fail" : ""}`}>Course Name:</label>
+          <input
+            id="courseName"
+            type="text"
+            name="course_name"
+            value={editedCourse.course_name}
+            onChange={handleInputChange}
+            placeholder="Course Name"
+          />
+        </div>
+        <div>
+          <label htmlFor="description" className={`${handleInputs("description") ? "label-fail" : ""}`}>Description:</label>
+          <textarea
+            id="description"
+            type="text"
+            name="description"
+            value={editedCourse.description}
+            onChange={handleInputChange}
+            maxLength={255}
+          />
+        </div>
+        <div>
+          <label htmlFor="modality" className={`${handleInputs("modality") ? "label-fail" : ""}`}>Modality:</label>
+          <select
+            id="modality"
+            name="modality"
+            value={editedCourse.modality}
+            onChange={handleInputChange}
+          >
+            <option value="">Select Type</option>
+            <option value="online">Online</option>
+            <option value="hybrid">Hybrid</option>
+            <option value="in-person">In-Person</option>
+          </select>
+        </div>
+        <div>
+          <label htmlFor="duration" className={`${handleInputs("duration") ? "label-fail" : ""}`}>Duration:</label>
+          <input
+            id="duration"
+            type="text"
+            name="duration"
+            value={editedCourse.duration}
+            onChange={handleInputChange}
+            placeholder="e.g., 12 weeks, 3 months, etc."
+          />
+        </div>
+        <div>
+          <label htmlFor="price" className={`${handleInputs("price") ? "label-fail" : ""}`}>Price:</label>
+          <input
+            id="price"
+            type="number"
+            name="price"
+            value={editedCourse.price}
+            onChange={handleInputChange}
+            placeholder="Course Price"
+          />
+        </div>
+        <div>
+          <label htmlFor="startDate" className={`${handleInputs("start_date") ? "label-fail" : ""}`}>Start Date:</label>
+          <input
+            id="startDate"
+            type="date"
+            name="start_date"
+            value={editedCourse.start_date}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="finishDate" className={`${handleInputs("finish_date") ? "label-fail" : ""}`}>Finish Date:</label>
+          <input
+            id="finishDate"
+            type="date"
+            name="finish_date"
+            value={editedCourse.finish_date}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="active" className={`${handleInputs("active") ? "label-fail" : ""}`}>Active:</label>
+          <select
+            id="active"
+            name="active"
+            value={editedCourse.active}
+            onChange={handleInputChange}
+          >
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+          </select>
+        </div>
+        <div>
+          <label htmlFor="type" className={`${handleInputs("type") ? "label-fail" : ""}`}>Type:</label>
+          <select
+            id="type"
+            name="type"
+            value={editedCourse.type}
+            onChange={handleInputChange}
+          >
+            <option value="">Select Type</option>
+            <option value="course">Course</option>
+            <option value="career">Career</option>
+            <option value="training">Training</option>
+          </select>
+        </div>
+        <div>
+          <label htmlFor="teacherId">Teacher ID:</label>
+          <select
+            id="teacherId"
+            name="teacherId"
+            value={courseTeacherId}
+            onChange={(e)=>setTeacherId(e.target.value)}
+          >
+            {!courseTeacherId && <option key={0} value={null}>Not assigned</option>}
+            {teacherList.map(teacher=>{
+              return <option key={teacher.id} value={teacher.id}>{teacher.first_name} {teacher.last_name}</option>
+            })}
+          </select>
+        </div>
+
+        <p className={loginError ? "p-login-error" : "p-login"}>
+          {serverDown ? "Server down" : `"Wrong insertions"`}
+        </p>
+        <button onClick={handleCourseEdition}>
+          {!loading ? "Create" : <Spinner />}
+        </button>
+        <button onClick={()=>close()}>
+          Close
+        </button>
+      </div>}
+      {successMsg && <div className="successful-creation">Successful creation</div>}
+    </div>
+  );
+};
+
+export default EditCourse;

@@ -1,10 +1,10 @@
-.all-courses-list-modal {
+.all-queries-list-modal {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  /* background-color: rgba(0, 0, 0, 0.75); */
+  /* background-color: rgba(0, 0, 0, 0.75);  */
   display: flex;
   flex-direction: column; /* Changed to column to center vertically */
   justify-content: center;
@@ -12,6 +12,7 @@
   z-index: 900;
   backdrop-filter: blur(5px); /* Add a blur effect to the background */
 }
+
 
 .no-data-container{
   height: 40vh;
@@ -21,7 +22,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
+  
 }
 
 .no-data-title{
@@ -43,21 +44,20 @@
   align-items: center;
 }
 
-
-
-.all-courses-list-container {
+.all-queries-list-container {
   display: flex;
   flex-direction: column;
   margin: 1rem;
   background-color: #fff;
-  font-size: 12px;
+  font-size: 13px;
   height: 60vh;
   border-radius: 5px; /* Add rounded corners to the container */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add a subtle shadow to the container */
   overflow-y: auto;
+  max-width: 70%;
 }
 
-.all-courses-list-content {
+.all-queries-list-content {
   /* height: 60vh; */
   width: 100%;
   background-color: transparent; /* Set content background to transparent */
@@ -70,7 +70,7 @@
 }
 
 
-.all-courses-list-container button {
+.all-queries-list-container button {
   display: flex;
   background-color: #007bff;
   color: #fff;
@@ -84,7 +84,7 @@
   /* width: 100%; */
 }
 
-.all-courses-list-container .button-close-listcourses{
+.all-queries-list-container .button-close-listqueries{
   display: flex;
   align-items: center;
   justify-content: center;
@@ -92,22 +92,22 @@
   align-self: center;
 }
 
-.all-courses-list-container button:hover {
+.all-queries-list-container button:hover {
   background-color: #0056b3;
 }
 
 
 /* Add alternate row colors */
-.all-courses-list-content tbody tr:nth-child(even) {
+.all-queries-list-content tbody tr:nth-child(even) {
   background-color: #cdcccc; /* Light grey background for even rows */
 }
 
 /* White background for odd rows */
-.all-courses-list-content tbody tr:nth-child(odd) {
+.all-queries-list-content tbody tr:nth-child(odd) {
   background-color: #ffffff;
 }
 
-.all-courses-list-content th, .all-users-list-content td {
+.all-queries-list-content th, .all-queries-list-content td {
   /* ... Your existing styles ... */
 
   /* Add border styles for table cells (th and td) */
@@ -115,7 +115,7 @@
 }
 
 /* Add border styles for table header cells (th) */
-.all-courses-list-content th {
+.all-queries-list-content th {
   /* ... Your existing styles ... */
 
   /* Add border styles for table header cells (th) */
@@ -125,12 +125,11 @@
 
 
 @media screen and (max-width: 786px) {
-  .all-courses-list-container{
+  .all-queries-list-container{
     width: 90%;
   }
-  .all-courses-list-content{
+  .all-queries-list-content{
     overflow-y: auto;
     overflow-x: auto;
   }
 }
-

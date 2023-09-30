@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import "./ListUsers.css";
 import axios from "axios";
 import { useGlobalState } from "../../context";
+import EditUser from "./EditUser";
 
 const ListUsers = ({ change, choice }) => {
   // Note the change from 'user' to 'users'
   const { APIURL, allUsers, setAllUsers } = useGlobalState();
+  const [openEdit, setOpenEdit] = useState(false);
+  const [editId, setEditId] = useState();
 
   const handleDelete = async (id) => {
     // Display a confirmation dialog
@@ -34,7 +37,8 @@ const ListUsers = ({ change, choice }) => {
   };
 
   const handleEdit = (id) => {
-    // Implement your edit logic here
+    setEditId(id);
+    setOpenEdit(true);
   };
 
   const handleContentClick = (event) => {
@@ -44,74 +48,99 @@ const ListUsers = ({ change, choice }) => {
 
   // Check if allUsers is defined and not an empty array
   if (!Array.isArray(allUsers) || allUsers.length === 0) {
-    return <div className="all-courses-list-modal" onClick={() => choice()}>
-    <div className="no-data-container" >
-      <div className="no-data-title" onClick={handleContentClick}>
-        <h3>Courses</h3>
-        <hr />
-      </div>
-      <p onClick={handleContentClick}>No data to display</p>
+    return (
+      <div className="all-courses-list-modal" onClick={() => choice()}>
+        <div className="no-data-container">
+          <div className="no-data-title" onClick={handleContentClick}>
+            <h3>Courses</h3>
+            <hr />
+          </div>
+          <p onClick={handleContentClick}>No data to display</p>
 
-      <button className="no-data-button-close" onClick={() => choice()}>Close</button>
-    </div>
-  </div>
+          <button className="no-data-button-close" onClick={() => choice()}>
+            Close
+          </button>
+        </div>
+      </div>
+    );
   }
 
-  const tableHeaders = Object.keys(allUsers[0]); // Assuming all users have the same structure
+  const tableHeadersFull = Object.keys(allUsers[0]); // Assuming all users have the same structure
+  const filtros = ["password", "deletedAt", "createdAt", "updatedAt"];
+  const tableHeaders = tableHeadersFull.filter((key) => !filtros.includes(key));
 
   return (
     <div className="all-users-list-modal" onClick={() => choice()}>
-      <div className="all-users-list-container">
-        <table className="all-users-list-content" onClick={handleContentClick}>
-          <thead>
-            <tr>
-              {tableHeaders.map((header) => (
-                <th key={header}>{header}</th>
-              ))}
-              <th>Edit</th>
-              <th>Delete</th>
-            </tr>
-          </thead>
-          <tbody>
-            {allUsers.map(
-              (
-                user // Map through the 'users' array
-              ) => (
-                <tr key={user.id}>
-                  {tableHeaders.map((header) => (
-                    <td key={header}>
-                      {header === "subscribed"
-                        ? user[header] === true
-                          ? "Yes"
-                          : "No"
-                        : header === "courses"
-                        ? user[header].map((element) => {
-                            return element.course_name;
-                          })
-                        : user[header]}
-                    </td>
+      <div className="all-users-list-container" onClick={handleContentClick}>
+        {openEdit ? (
+          <EditUser userId={editId} close={() => setOpenEdit(false)} />
+        ) : (
+          <>
+            <table
+              className="all-users-list-content"
+              onClick={handleContentClick}
+            >
+              <table
+                className="all-users-list-content"
+                onClick={handleContentClick}
+              >
+                <thead>
+                  <tr>
+                    {tableHeaders.map((header) => (
+                      <th key={header}>{header}</th>
+                    ))}
+                    <th>Edit</th>
+                    <th>Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {allUsers.map((user) => (
+                    <tr key={user.id}>
+                      {tableHeaders.map((header) => (
+                        <td
+                          key={header}
+                          className={
+                            header === "courses"
+                              ? "list-user-courses-header"
+                              : ""
+                          }
+                        >
+                          {header === "subscribed"
+                            ? user[header] === true
+                              ? "Yes"
+                              : "No"
+                            : header === "courses"
+                            ? user[header].map((element) => {
+                                return (
+                                  element.course_name.replace(/ /g, ".") + " "
+                                );
+                              })
+                            : user[header]}
+                        </td>
+                      ))}
+                      <td>
+                        <button onClick={() => handleEdit(user.id)}>
+                          <FaEdit />
+                        </button>
+                      </td>
+                      <td>
+                        <button onClick={() => handleDelete(user.id)}>
+                          <FaTrash />
+                        </button>
+                      </td>
+                    </tr>
                   ))}
-                  <td>
-                    <button onClick={() => handleEdit(user.id)}>
-                      <FaEdit />
-                    </button>
-                  </td>
-                  <td>
-                    <button onClick={() => handleDelete(user.id)}>
-                      <FaTrash />
-                    </button>
-                  </td>
-                </tr>
-              )
-            )}
-          </tbody>
-        </table>
-        <button className="button-close-listusers" onClick={() => choice()}>
-          Close
-        </button>
+                </tbody>
+              </table>
+            </table>
+            <button className="button-close-listusers" onClick={() => choice()}>
+              Close
+            </button>
+          </>
+        )}
+        ;
       </div>
     </div>
   );
 };
-
 export default ListUsers;

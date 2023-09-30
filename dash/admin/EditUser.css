@@ -1,0 +1,105 @@
+.edit-user-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  margin-bottom: 0;
+  margin-top: 0; 
+}
+
+.edit-user-form {
+  min-width: 40%;
+  background-color: #e0dddd;
+  padding: 1rem;
+  border-radius: 10px;
+  /* box-shadow: 12px 12px 10px rgba(0, 0, 0, 0.315); */
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.315);
+}
+
+.edit-user-input-container{
+  margin: 2rem 0;
+}
+
+.edit-user-form h1 {
+  font-size: 24px;
+  text-align: center;
+}
+.edit-user-form hr {
+  margin-bottom: 10px;
+}
+.edit-user-form label {
+  display: block;
+  margin-top: 1rem;
+  text-align: left;
+  font-size: 1rem;
+  font-weight: 500;
+  
+}
+.edit-user-form span {
+  font-weight: bold;
+}
+
+.edit-user-form input[type="email"]{
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  outline: none;
+  margin-bottom: 0.8rem;
+}
+
+.edit-user-form button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  margin: 1rem 0 1rem auto; 
+  display: block; 
+  width: 100%;
+}
+
+.edit-user-form button:hover {
+  background-color: #0056b3;
+}
+
+.edit-user-form a {
+  text-decoration: none;
+  color: #007bff;
+  transition: color 0.2s;
+}
+
+.edit-user-form a:hover {
+  color: #0056b3;
+}
+
+
+.edit-user-login-error {
+  display: block;
+  color: red;
+}
+
+.edit-user-login {
+  display: none;
+}
+
+.edit-user-login-success {
+  color: rgb(7, 151, 7);
+}
+
+.edit-user-label-edit {
+  color: rgb(7, 151, 7);
+}
+
+.display{
+  display: block;
+}
+
+@media screen and (max-width: 786) {
+  
+  .edit-user-form{
+    width: 80%;
+  }
+}

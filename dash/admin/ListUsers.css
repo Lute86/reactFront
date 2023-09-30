@@ -4,7 +4,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.75); /* Semi-transparent background */
+  /* background-color: rgba(0, 0, 0, 0.75);  */
   display: flex;
   flex-direction: column; /* Changed to column to center vertically */
   justify-content: center;
@@ -50,7 +50,7 @@
   margin: 1rem;
   background-color: #fff;
   font-size: 10px;
-  height: 60vh;
+  max-height: 60vh;
   border-radius: 5px; /* Add rounded corners to the container */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add a subtle shadow to the container */
   overflow-y: auto;
@@ -121,11 +121,16 @@
   border: 1px solid #cdcecf; /* Use your desired border color here */
 }
 
-
+.list-user-courses-header{
+  display: flex;
+  flex-direction: column;
+  height: auto;
+}
 
 @media screen and (max-width: 786px) {
+
   .all-users-list-container{
-    width: 90%;
+    max-width: 90%;
   }
   .all-users-list-content{
     overflow-y: auto;

@@ -1,0 +1,13 @@
+.submission-thanks-container{
+  display: flex;
+  flex-direction: column;
+  height: 20vh;
+  width: auto;
+  justify-content: center;
+  align-items: center;
+}
+
+.submission-thanks-container h3{
+  padding: 1rem;
+}
+

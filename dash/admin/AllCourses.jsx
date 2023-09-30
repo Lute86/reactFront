@@ -1,20 +1,26 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import "./AllCourses.css";
 import { useGlobalState } from "../../context";
-import ListUsers from "./ListUsers";
 import ListCourses from "./ListCourses";
-import { FaEdit, FaList } from "react-icons/fa";
-import Spinner from "../../components/Spinner";
+import { CiViewList } from "react-icons/ci";
+import { FiEdit2 } from "react-icons/fi";
+import CreateCourse from "./CreateCourse";
 
 const AllCoursesFetch = ({ choice }) => {
   const { loading, setLoading } = useGlobalState();
   const [openCourseList, setOpenCourseList] = useState(false);
+  const [openCourseCreation, setOpenCourseCreation] = useState(false);
 
   function handleClickList() {
     setLoading(true)
     setOpenCourseList(true);
   }
+
+  function handleClickCreate() {
+    setLoading(true)
+    setOpenCourseCreation(true);
+  }
+
   function handleChoice() {
     choice()
     setLoading(false)
@@ -22,7 +28,7 @@ const AllCoursesFetch = ({ choice }) => {
 
   return (
     <div className="allcourses-modal" onClick={handleChoice}>
-      {!openCourseList && (
+      {(!openCourseList && !openCourseCreation) && (
         <div
         className="allcourses-modal-content"
         onClick={(event) => event.stopPropagation()}
@@ -31,19 +37,24 @@ const AllCoursesFetch = ({ choice }) => {
           <hr />
           <div className="allcourses-inside-content">
             <div>
-              <FaEdit className="allcourses-fa-icon"/>
+              <FiEdit2 className="allcourses-icon" onClick={handleClickCreate}/>
             </div>
             <div>
-              <FaList className="allcourses-fa-icon" onClick={handleClickList} />
+              <CiViewList className="allcourses-icon" onClick={handleClickList}/>
             </div>
           </div>
           <button className="allcourses-inside-button" onClick={handleChoice}>Close</button>
         </div>
       )}
       {openCourseList && (
-        <>
+        <div onClick={(event) => event.stopPropagation()}>
           <ListCourses close={() => setOpenCourseList(false)} />
-        </>
+        </div>
+      )}
+      {openCourseCreation && (
+        <div onClick={(event) => event.stopPropagation()}>
+          <CreateCourse close={() => setOpenCourseCreation(false)} />
+        </div>
       )}
     </div>
   );

@@ -1,0 +1,112 @@
+.edit-course-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  margin-bottom: 0;
+  margin-top: 0; 
+}
+
+.edit-course-form {
+  min-width: 40%;
+  background-color: #e0dddd;
+  padding: 1rem;
+  border-radius: 10px;
+  /* box-shadow: 12px 12px 10px rgba(0, 0, 0, 0.315); */
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.315);
+}
+
+.edit-course-form h1 {
+  font-size: 24px;
+  text-align: center;
+}
+.edit-course-form hr {
+  margin-bottom: 10px;
+}
+.edit-course-form label {
+  display: block;
+  margin-bottom: 8px;
+  /* font-weight: bold; */
+  text-align: left;
+}
+.edit-course-form span {
+  font-weight: bold;
+}
+
+.edit-course-form input{
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  outline: none;
+  margin-bottom: 0.8rem;
+}
+
+.edit-course-form button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  margin: 0 0 1rem auto; /* Center the button horizontally and add margin to control spacing */
+  display: block; /* Ensure the button takes up full width */
+  width: 100%;
+}
+
+.edit-course-form button:hover {
+  background-color: #0056b3;
+}
+
+.edit-course-form a {
+  text-decoration: none;
+  color: #007bff;
+  transition: color 0.2s;
+}
+
+.edit-course-form a:hover {
+  color: #0056b3;
+}
+
+
+.p-login-error {
+  color: red;
+  font-size: 14px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.p-login {
+  font-size: 14px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.label-fail {
+  color: red;
+}
+
+.display{
+  display: block;
+}
+
+.successful-creation{
+  display: flex;
+  height: 10vh;
+  width: auto;
+  background-color: #fff;
+  color: rgb(3, 205, 3);
+  text-align: center;
+  margin: 2rem auto;
+  padding: 2rem;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 786) {
+  
+  .edit-course-form{
+    width: 80%;
+  }
+}

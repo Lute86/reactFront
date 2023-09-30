@@ -3,8 +3,8 @@ import './Thanks.css'
 
 function Thanks() {
   return (
-    <div>
-      <h2>Thank you for your submission!</h2>
+    <div className='submission-thanks-container'>
+      <h3>Thank you for your submission!</h3>
       <p>We appreciate your inquiry.</p>
     </div>
   );

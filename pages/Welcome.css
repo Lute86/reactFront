@@ -180,7 +180,7 @@
   gap: 20px; /* Adds spacing between logos */
   max-width: 800px; /* Set your preferred max width */
   margin: 0 auto; /* Center the logos container */
-  opacity: 0.3;
+  opacity: 0.7;
 }
 
 .company-logos img {
@@ -188,7 +188,11 @@
   max-width: 100%;
 }
 
-
+.welcome-companies-img{
+  height: 7rem;
+  width: 7rem;
+  border-radius: 30%;
+}
 
 /* Responsive */
 /* Responsive Styles */

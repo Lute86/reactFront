@@ -58,6 +58,7 @@ function ContactForm() {
       setReason("payment");
       setDescription("");
       setLoading(false)
+      setLoginError(false)
     } catch (error) {
       console.error("Contact error", error);
       setLoginError(true);
@@ -132,10 +133,11 @@ function ContactForm() {
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 placeholder="Please describe your inquiry..."
+                maxLength={255}
               />
             </div>
             <p className={loginError ? "p-login-error" : "p-login"}>
-              {serverDown ? "Server down" : ""}
+              {serverDown ? "Server down" : loginError ? "Missing fields" : ''}
             </p>
             <button onClick={handleContact}>
               {!loading ? "Submit" : <Spinner />}
