@@ -1,24 +1,18 @@
-/* Welcome.css */
-:root {
-	--mainColor: #29335c;
-	--mainColorLight: #5767aa;
-	--secondaryColor: #db2b39;
-	--textColor: #eee;
-}
-
 /* Container for the entire Welcome component */
 .welcome-container {
   padding: 0px;
   margin: 0;
+  color: var(--secondaryColor);
 }
 .welcome-container h2 {
   font-size: xx-large;
+  color: var(--mainColorLight);
 }
 
 /* Image */
 /* Set background image, fixed scrolling, height, and full width */
 .background-section {
-  background-image: url('../assets/manos-comm-width-sm.jpg'); /* Replace with your image URL */
+  background-image: url("../assets/manos-comm-width-sm.jpg"); /* Replace with your image URL */
   background-size: cover;
   background-position: center;
   bottom: 0;
@@ -40,16 +34,17 @@
   text-align: center;
 }
 
-.bg-img-subtitle, .bg-img-title{
+.bg-img-subtitle,
+.bg-img-title {
   transform: skewY(-3deg); /* Adjust the skew angle */
 }
 
-.bg-img-title{
+.bg-img-title {
   color: rgb(241, 230, 230);
   font-size: 40px;
 }
 
-.bg-img-subtitle{
+.bg-img-subtitle {
   color: #c6c8d2;
 }
 
@@ -57,7 +52,6 @@
 .about-us {
   margin-bottom: 40px;
   padding: 0 150px;
-  
 }
 
 .about-us-content {
@@ -74,41 +68,48 @@
   padding-left: 20px;
 }
 
-.p-about{
+.p-about {
   padding: 2rem 2rem;
 }
 
-.img-about{
+.img-about {
   border-radius: 0 10% 0 10%;
 }
 
 /* Values section */
-.values {
+.values,
+.courses {
   padding: 40px 0px 60px;
   background-color: var(--mainColor);
   margin: 4rem 0rem;
   width: 100vw;
-  transform: skewY(-3deg); /* Adjust the skew angle */
   /* transform-origin: top;
   z-index: -1;  */
 }
-.values-content{
-  transform: skewY(3deg); /* Adjust the opposite skew angle to cancel the effect */
-}
-.values h2 {
-  margin-bottom: 10px;
-  color: var(--textColor);
-  
+
+.values {
+  transform: skewY(-3deg);
 }
 
-.values-grid {
+.values-content {
+  transform: skewY(3deg);
+}
+
+.values h2 {
+  margin-bottom: 2rem;
+  color: var(--textColor);
+}
+
+.values-grid,
+.course-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
 }
 
 /* Add this CSS in your stylesheet */
-.value-cards {
+.value-cards,
+.course-cards {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -118,7 +119,8 @@
   text-align: center;
 }
 
-.value-card {
+.value-card,
+.course-card {
   flex-basis: calc(33.33% - 20px); /* Display in three columns */
   display: flex;
   flex-direction: column;
@@ -126,26 +128,48 @@
   background-color: var(--bgColor);
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.value-card h3 {
+.value-card {
+  box-shadow: 0 2px 14px rgba(9, 9, 9, 0.8);
+}
+
+.value-card h3,
+.course-card h3 {
   margin-bottom: 10px;
+  color: var(--mainColor);
 }
 
+/* Values section */
+.courses {
+  transform: skewY(3deg);
+}
+
+.courses-content {
+  transform: skewY(-3deg);
+}
+
+.courses h2 {
+  margin-bottom: 2rem;
+  color: var(--textColor);
+}
+
+.course-card {
+  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.7);
+}
 
 /* Companies Involved section */
-.companies-involved h2, p{
+.companies-involved h2,
+p {
   text-align: center;
 }
 
-.companies-involved p{
+.companies-involved p {
   margin-bottom: 1rem;
 }
 
 .companies-involved {
   margin-bottom: 6rem;
-
 }
 
 .company-list {
@@ -157,8 +181,58 @@
   margin-bottom: 5px;
 }
 
-.p-companies{
+.p-companies {
   padding: 2rem 2rem;
+}
+
+/* Subscription section */
+.subscription {
+  /* background-color: var(--mainColor); */
+  /* color: var(--textColorLight); */
+  padding: 40px 0;
+  width: 100vw;
+  /* transform: skewY(3deg); */
+}
+
+.subscription-content {
+  /* transform: skewY(-3deg); */
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.subscription h2 {
+  margin-bottom: 2rem;
+}
+
+.subscription-features {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin: 2rem;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.subscription-features li {
+  margin-bottom: 10px;
+}
+
+.subscription-button button {
+  background-color: #0056b3;
+  color: var(--textColor);
+  border: none;
+  margin-top: 2rem;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.subscription-button button:hover {
+  background-color: #007bff;
 }
 
 /* Login link */
@@ -169,9 +243,7 @@
   text-decoration: underline;
 }
 
-
 /* Logos */
-
 
 .company-logos {
   display: flex;
@@ -188,7 +260,7 @@
   max-width: 100%;
 }
 
-.welcome-companies-img{
+.welcome-companies-img {
   height: 7rem;
   width: 7rem;
   border-radius: 30%;
@@ -197,8 +269,19 @@
 /* Responsive */
 /* Responsive Styles */
 @media screen and (max-width: 768px) {
-  /* Add your responsive styles here */
   .welcome-container {
+    overflow: hidden;
+  }
+
+  /* .background-section{
+    margin-top: 0;
+   } */
+
+  .subscription {
+    padding: 5rem;
+  }
+
+  .companies-involved {
     padding: 1rem;
   }
 
@@ -213,7 +296,7 @@
     margin-top: 20px;
   }
   .about-us {
-    padding: 0 1rem;
+    padding: 0;
     flex-direction: column-reverse; /* Change to reverse column layout on smaller screens */
   }
 
@@ -227,33 +310,48 @@
     order: 1; /* Change the order of the left column */
   }
 
-  .p-about{
+  .p-about {
     width: 80vw;
     margin-bottom: 2rem;
   }
-  
+
   .values {
     padding: 20px 0;
   }
-  
+
   .values-content {
-    transform: skewY(3deg); /* Adjust the opposite skew angle to cancel the effect */
+    transform: skewY(
+      3deg
+    ); /* Adjust the opposite skew angle to cancel the effect */
     padding-bottom: 4rem;
     padding-top: 2rem;
   }
-  
-  .value-cards {
+
+  .value-cards,
+  .course-cards {
     flex-direction: column;
     align-items: center;
     width: 80%;
   }
-  
-  .value-card {
+
+  .value-card,
+  .course-card {
     flex-basis: 100%; /* Full width on smaller screens */
     text-align: center;
   }
-  
+
   .company-logos img {
     flex: 0 0 calc(33.33% - 20px); /* Adjust for smaller screens */
+  }
+}
+
+@media screen and (max-width: 425px) {
+  /* Add your responsive styles here */
+  .welcome-container {
+    padding: 0;
+  }
+
+  .subscription {
+    padding: 3rem;
   }
 }

@@ -32,7 +32,7 @@ function Navbar() {
 				{userRole=='admin' && <Link to="/admin" onClick={closeNavbar}>Dashboard</Link>}
 				{isLoggedIn && <Link to="/logout" onClick={closeNavbar}>Logout</Link>}
 				{!isLoggedIn && (<span> <Link to="/contact" onClick={closeNavbar}>Contact</Link></span>)}
-				{!isLoggedIn && (<span> <Link to="/register" onClick={closeNavbar}>Register</Link></span>)}
+				{!isLoggedIn && (<span> <Link to="/login" onClick={closeNavbar}>Login</Link></span>)}
 				<button
 					className="nav-btn nav-close-btn"
 					onClick={showNavbar}>

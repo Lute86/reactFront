@@ -143,7 +143,7 @@ function ContactForm() {
               {!loading ? "Submit" : <Spinner />}
             </button>
             <p>
-              <Link to="/register">Register</Link>
+              Join us now! <Link to="/register">Register</Link>
             </p>
           </div>
         </div>

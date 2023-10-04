@@ -6,6 +6,7 @@
   width: 100%;
   bottom: 0;
   left: 0;
+  color: var(--textColor);
 }
 
 .footer-content {
@@ -15,6 +16,7 @@
   align-items: center;
   max-width: 1200px;
   margin: 0 auto;
+  font-size: large;
 }
 
 .footer-column {
@@ -48,12 +50,17 @@
   color: inherit;
 }
 
+.footer-links a:hover{
+  color: var(--mainColorLightest);
+}
+
 .footer-copyright {
   text-align: center;
+  font-size: small;
 }
 
 .p-footer-logo {
-  font-size: xx-large;
+  font-size: 3rem;
   justify-self: center;
   align-self: center;
 }

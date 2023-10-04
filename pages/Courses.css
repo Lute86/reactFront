@@ -34,3 +34,10 @@ h2{
   color:red;
   margin: 0 auto;
 }
+
+
+@media screen and (max-width: 768px) {
+  .courses-body{
+    margin-top: 3rem;
+  }
+}

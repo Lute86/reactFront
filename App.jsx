@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
-import { BrowserRouter, Route, Link, Routes } from "react-router-dom";
-import { useGlobalState } from "./context";
+import React from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./index.css";
 import Registration from "./pages/Registration";
 import Login from "./pages/Login";
@@ -8,15 +7,13 @@ import Logout from "./pages/Logout";
 import Welcome from "./pages/Welcome";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import { AppContext } from "./context";
 import UserDash from "./dash/user/UserDash";
 import AdminDash from "./dash/admin/AdminDash";
 import Courses from "./pages/Courses";
 import ContactForm from "./pages/Contact";
+import Error from "./pages/Error";
 
 const App = () => {
-  const { isLoggedIn } = useGlobalState();
-
 
   return (
     <BrowserRouter>
@@ -32,6 +29,7 @@ const App = () => {
           <Route path="/user" element={<UserDash />} />
           <Route path="/admin" element={<AdminDash />} />
           <Route path="/contact" element={<ContactForm />} />
+          <Route path="/*" element={<Error />} />
         </Routes>
 
         <Footer />
