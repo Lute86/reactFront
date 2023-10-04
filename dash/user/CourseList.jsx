@@ -1,3 +1,5 @@
+//No tiene funcion?
+
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./CourseList.css";
@@ -12,7 +14,9 @@ const CoursesList = () => {
       try {
         if (userInfo && userInfo.id) {
           if (userRole === "admin") {
-            const response = await axios.get("http://localhost:4001/course/all");
+            const response = await axios.get(
+              "http://localhost:4001/course/all"
+            );
             setCourses(response.data);
           } else {
             const response = await axios.get(
@@ -31,18 +35,28 @@ const CoursesList = () => {
   }, [userInfo, userRole]);
 
   const unsubscribeFromCourse = async (courseId) => {
-    try {
-      // Send a request to unsubscribe the user from the course
-      await axios.delete(`http://localhost:4001/user/${userInfo.id}/removeCourse/${courseId}`, {
-        withCredentials: true,
-      });
+    // Display a confirmation dialog
+    const isConfirmed = window.confirm(
+      "Are you sure you want to delete this course?"
+    );
+    // Check if the user confirmed the deletion
+    if (isConfirmed) {
+      try {
+        // Send a request to unsubscribe the user from the course
+        await axios.delete(
+          `http://localhost:4001/user/${userInfo.id}/removeCourse/${courseId}`,
+          {
+            withCredentials: true,
+          }
+        );
 
-      // Update the courses list by removing the unsubscribed course
-      setCourses((prevCourses) =>
-        prevCourses.filter((course) => course.id !== courseId)
-      );
-    } catch (error) {
-      console.error("Unsubscribe error", error);
+        // Update the courses list by removing the unsubscribed course
+        setCourses((prevCourses) =>
+          prevCourses.filter((course) => course.id !== courseId)
+        );
+      } catch (error) {
+        console.error("Unsubscribe error", error);
+      }
     }
   };
 

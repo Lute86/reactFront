@@ -59,6 +59,7 @@ const PaymentForm = ({toggle}) => {
       setLoading(false)
       // Handle errors (e.g., display an error message)
       console.error(error);
+      alert("error al pagar")
     }
   };
   

@@ -25,30 +25,35 @@ const UserCoursesList = () => {
   }, [userInfo, userRole]);
 
   const unsubscribeFromCourse = async (courseId) => {
-    try {
-      // Send a request to unsubscribe the user from the course
-      await axios.delete(
-        `http://localhost:4001/user/${userInfo.id}/removeCourse/${courseId}`,
-        {
-          withCredentials: true,
-        }
-      );
+    const isConfirmed = window.confirm(
+      "Are you sure you want to delete this course?"
+    );
+    // Check if the user confirmed the deletion
+    if (isConfirmed) {
+      try {
+        // Send a request to unsubscribe the user from the course
+        await axios.delete(
+          `http://localhost:4001/user/${userInfo.id}/removeCourse/${courseId}`,
+          {
+            withCredentials: true,
+          }
+        );
 
-      // Update the courses list by removing the unsubscribed course
-      setCourses((prevCourses) =>
-        prevCourses.filter((course) => course.id !== courseId)
-      );
-    } catch (error) {
-      console.error("Unsubscribe error", error);
+        // Update the courses list by removing the unsubscribed course
+        setCourses((prevCourses) =>
+          prevCourses.filter((course) => course.id !== courseId)
+        );
+      } catch (error) {
+        console.error("Unsubscribe error", error);
+      }
     }
   };
-
 
   return (
     <div className="course-list-container">
       <h2 className="h2-user-courses">My Courses</h2>
       <hr />
-      <ListUserCourses data={courses} onDelete={unsubscribeFromCourse}/>
+      <ListUserCourses data={courses} onDelete={unsubscribeFromCourse} />
     </div>
   );
 };

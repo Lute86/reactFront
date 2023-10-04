@@ -7,6 +7,7 @@ import Spinner from "../components/Spinner";
 import Modal from "../components/Modal";
 import SingleCourse from "../components/SingleCourse";
 import { useNavigate } from "react-router-dom";
+import InfiniteCarousel from "../components/InfiniteCarousel";
 
 
 function Courses() {
@@ -48,13 +49,15 @@ function Courses() {
     : null;
 
   const handleCourseClick = (id) => {
-    console.log("id", id)
+    // console.log("id", id)
     setModalId(id)
     setModalOpen(true)
   }
   return (
     <div className="courses-body">
+      <InfiniteCarousel/>
       <h2>Courses</h2>
+      <hr />
       <div className="courses-options">
         <p className="p-option" onClick={() => setOption("")}>
           All
@@ -88,6 +91,7 @@ function Courses() {
       {modalOpen && (<Modal onClose={()=>setModalOpen(false)}>
               <SingleCourse id={modalId}/>
         </Modal>)}
+      <InfiniteCarousel/>
     </div>
   );
 }

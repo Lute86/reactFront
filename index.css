@@ -4,6 +4,7 @@
 @import './pages/Courses.css';
 @import './pages/Login.css';
 @import './pages/Registration.css';
+@import './components/InfiniteCarousel.css';
 
 
 :root {

@@ -25,7 +25,7 @@ function AdminDash() {
         );
         //console.log("Data", response.data);
         if (response.status === 200) {
-          console.log("User is authenticated");
+          // console.log("User is authenticated");
           setUserInfo(response.data);
         } else {
           console.log("User is not authenticated, redirecting to /login");

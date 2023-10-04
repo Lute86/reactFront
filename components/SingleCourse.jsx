@@ -13,7 +13,7 @@ function SingleCourse({ id }) {
     try {
       const response = await axios.get("http://localhost:4001/course/" + id);
       setCourse(response.data[0]);
-      console.log(response.data);
+      // console.log(response.data);
       setLoading(false);
     } catch (error) {
       console.error("Fetch courses error", error);

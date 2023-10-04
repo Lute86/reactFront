@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { FaShoppingCart, FaRegBookmark, FaFireAlt } from "react-icons/fa";
+import React, { useEffect, useState } from "react";
+import { FaShoppingCart, FaRegBookmark, FaFireAlt, FaBookmark } from "react-icons/fa";
 import "./CourseCard.css";
 import image from "../assets/react.svg";
 import { useGlobalState } from "../context";
@@ -7,17 +7,32 @@ import axios from "axios";
 
 function CourseCard({ course, onClick }) {
   const { userRole, userInfo, pingUser} = useGlobalState();
+  const [blackReg, setBlackReg] = useState(false)
 
+  const image = [
+      {img:'src/assets/courses/programming.png', alt:'programming'},
+      {img:'src/assets/courses/career.png', alt:'career'},
+      {img:'src/assets/courses/training.png', alt:'training'},
+      {img:'src/assets/courses/courses.png', alt:'course'},
+    ]
+
+  function handleImage(type){
+    if(type=='career') return image[1].img;
+    else if(type=='training') return image[2].img;
+    else if(type=='course') return image[3].img;
+    else return image[0].img
+  }
 
   const addCourse = async (userInfo, id) => {
-    console.log(userInfo.id);
-    console.log(id);
+    // console.log(userInfo.id);
+    // console.log(id);
     try {
       const response = await axios.post(
         `http://localhost:4001/user/${userInfo.id}/addCourse/${id}`,{},
         { withCredentials: true }
       );
-      console.log(response.data);
+      //console.log(response.data);
+      alert('Course added successfully')
     } catch (error) {
       console.error("Add course error", error.message);
     }
@@ -28,7 +43,7 @@ function CourseCard({ course, onClick }) {
     <div className="courseCardContainer">
       <div className="courseCard">
         <img
-          src={image} /* Assuming you have an 'image' prop */
+          src={handleImage(course.type)} /* Assuming you have an 'image' prop */
           alt="Course"
           className="courseImage"
           onClick={onClick}
@@ -42,12 +57,20 @@ function CourseCard({ course, onClick }) {
           </div>
           {userRole == "user" && (
             <div className="courseCard__icons">
-              {userInfo.subscribed && (<FaRegBookmark
+              {!blackReg ? userInfo.subscribed && (<FaRegBookmark
                 className="courseCard__wishlist"
                 onClick={() => {
                   pingUser();
                   addCourse(userInfo, course.id)
                 }}
+                onMouseOver={()=>setBlackReg(true)}
+              />) : userInfo.subscribed && (<FaBookmark
+                className="courseCard__wishlist"
+                onClick={() => {
+                  pingUser();
+                  addCourse(userInfo, course.id)
+                }}
+                onMouseOut={()=>setBlackReg(false)}
               />)}
               <FaFireAlt className="courseCard__fastSelling" />
             </div>
