@@ -4,10 +4,16 @@ import "../index.css";
 import aboutImg from "../assets/high-five-long.jpg";
 import companies from "../companies";
 import { useNavigate } from "react-router-dom";
+import usePingUser from "../hooks/usePingUser";
 
 function Welcome() {
-  const { pingUser, userInfo } = useGlobalState();
+  const { userInfo } = useGlobalState();
   const navigate = useNavigate();
+  const { pingUser } = usePingUser();
+
+  useEffect(() => {
+    pingUser()
+  }, [navigate]);
 
   function handleSubscription(){
     navigate('/register')

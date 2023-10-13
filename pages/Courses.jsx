@@ -8,15 +8,16 @@ import Modal from "../components/Modal";
 import SingleCourse from "../components/SingleCourse";
 import { useNavigate } from "react-router-dom";
 import InfiniteCarousel from "../components/InfiniteCarousel";
+import usePingUser from "../hooks/usePingUser";
 
 
 function Courses() {
-  const { serverDown, setServerDown, loading, setLoading, pingUser, userInfo } = useGlobalState();
+  const { serverDown, setServerDown, loading, setLoading, userInfo } = useGlobalState();
   const [courses, setCourses] = useState(null);
   const [option, setOption] = useState(""); // State to track the selected option
   const [modalId, setModalId] = useState(null)
   const [modalOpen, setModalOpen] = useState(false)
-
+  const { pingUser } = usePingUser();
 
   const navigate = useNavigate();
   
@@ -36,8 +37,8 @@ function Courses() {
   useEffect(() => {
     setServerDown(false);
     getCourses();
-    //ping user hook
-  }, [userInfo?.subscribed]);
+    pingUser();
+  }, [navigate]);
 
   // Filter courses based on the selected option
   const filteredCourses = courses

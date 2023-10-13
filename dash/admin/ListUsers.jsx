@@ -112,7 +112,7 @@ const ListUsers = ({ change, choice }) => {
                             : header === "courses"
                             ? user[header].map((element) => {
                                 return (
-                                  element.course_name.replace(/ /g, ".") + " "
+                                  <p>{element.course_name}</p>
                                 );
                               })
                             : user[header]}

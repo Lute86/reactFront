@@ -129,7 +129,7 @@ const ListCourses = ({ close }) => {
                     <td key={header}>
                       {header === "teachers"
                         ? course[header].map((element) => {
-                            return element.last_name+' ';
+                            return <p>{element.last_name}</p>;
                           })
                         : header === "start_date" || header === "finish_date"
                         ? (course[header] ? new Date(course[header]).toLocaleDateString() : "none")

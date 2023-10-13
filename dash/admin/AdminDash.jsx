@@ -8,46 +8,17 @@ import { useNavigate } from "react-router-dom";
 import Modal from "../../components/Modal";
 import AllCourses from "./AllCourses";
 import AllQueries from "./AllQueries";
-
+import usePingUser from '../../hooks/usePingUser'
 
 function AdminDash() {
   const { isLoggedIn, userRole, userInfo, setUserInfo, setIsLoggedIn, setUserRole } = useGlobalState();
   const [choice, setChoice] = useState('')
   const navigate = useNavigate();
+  const { pingUser } = usePingUser();
   
   
   useEffect(() => {
-    async function pingUser() {
-      try {
-        const response = await axios.get(
-          "http://localhost:4001/admin/my/status/" + userInfo.id,
-          { withCredentials: true }
-        );
-        //console.log("Data", response.data);
-        if (response.status === 200) {
-          // console.log("User is authenticated");
-          setUserInfo(response.data);
-        } else {
-          console.log("User is not authenticated, redirecting to /login");
-          navigate("/login");
-        }
-      } catch (error) {
-        console.log("error", error.code);
-        if (error.code === "ERR_NETWORK") {
-          console.error(
-            "Server is not reachable. Make sure the server is running."
-          );
-        }
-        // Handle any errors that occur during the ping request
-        console.error("Error checking authentication status:", error);
-        navigate("/login");
-        setUserInfo(null);
-        setIsLoggedIn(false);
-        setUserRole("");
-      }
-    }
-
-    pingUser();
+    pingUser()
   }, [navigate]);
 
 

@@ -74,7 +74,6 @@ const Registration = () => {
           setFailedInput((prev) => new Set([...prev, element.param]));
         });
       }
-      console.log(failedInput)
       setLoading(false);
     }
   };
@@ -88,7 +87,6 @@ const Registration = () => {
         valueInput = true;
       }
     });
-    console.log(valueInput)
     return valueInput;
   };
 
@@ -97,7 +95,7 @@ const Registration = () => {
       <div className="registration-form">
         <h1>Registration</h1>
         <div>
-          <label for="name" className={`${handleInputs("first_name")?'label-fail':""}`}>First Name:
+          <label htmlFor="name" className={`${handleInputs("first_name")?'label-fail':""}`}>First Name:
           </label>
           <input 
             id="name"
@@ -108,7 +106,7 @@ const Registration = () => {
           />
         </div>
         <div>
-          <label for="last" className={`${handleInputs("last_name")?'label-fail':""}`}>Last Name:
+          <label htmlFor="last" className={`${handleInputs("last_name")?'label-fail':""}`}>Last Name:
           </label>
           <input 
             id="last"
@@ -119,7 +117,7 @@ const Registration = () => {
           />
         </div>
         <div>
-          <label for="email" className={`${handleInputs("email")?'label-fail':""}`}>Email:
+          <label htmlFor="email" className={`${handleInputs("email")?'label-fail':""}`}>Email:
           </label>
           <input 
             id="email"
@@ -130,7 +128,7 @@ const Registration = () => {
           />
         </div>
         <div>
-          <label for="password" className={`${handleInputs("password")?'label-fail':""}`}>Password:
+          <label htmlFor="password" className={`${handleInputs("password")?'label-fail':""}`}>Password:
           </label>
           <input className={``}
             id="password"

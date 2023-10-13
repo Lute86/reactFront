@@ -9,15 +9,21 @@ import { FiEdit2 } from "react-icons/fi";
 const AllQueries = ({ choice }) => {
   const { loading, setLoading } = useGlobalState();
   const [openQueriesList, setOpenQueriesList] = useState(false);
-
+  
   function handleClickList() {
     setLoading(true)
     setOpenQueriesList(true);
   }
+
+  function handleEdit() {
+    //TODO
+  }
+
   function handleChoice() {
     choice()
     setLoading(false)
   }
+
 
   return (
     <div className="allcourses-modal" onClick={handleChoice}>
@@ -30,7 +36,7 @@ const AllQueries = ({ choice }) => {
           <hr />
           <div className="allcourses-inside-content">
             <div>
-              <FiEdit2 className="allcourses-icon"/>
+              <FiEdit2 className="allcourses-icon" onClick={handleEdit}/>
             </div>
             <div>
               <CiViewList className="allcourses-icon" onClick={handleClickList}/>
@@ -44,6 +50,7 @@ const AllQueries = ({ choice }) => {
           <ListQueries close={() => setOpenQueriesList(false)} />
         </>
       )}
+      
     </div>
   );
 };

@@ -34,11 +34,13 @@ function SingleCourse({ id }) {
           <p>{course.description}</p>
           {course.teachers.length > 0 && (
             <p className="teacher">
-              Teacher: {course.teachers[0].first_name}{" "}
-              {course.teachers[0].last_name}
+              {course.teachers.length>1?"Teachers":"Teacher"}: {course.teachers.map((item, index)=>{
+                const {first_name, last_name} = item
+                return <p key={index}>{`${first_name} ${last_name}`}</p>;
+              })}
             </p>
           )}
-          {!userInfo.subscribed && <button>Subscribe</button>}
+          {/* {userInfo && userInfo.role != 'admin' && !userInfo.subscribed && <button>Subscribe</button>} */}
         </div>
       ) : loading ? (
         <div className="spinner">

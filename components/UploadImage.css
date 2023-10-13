@@ -1,0 +1,27 @@
+.upload-container{
+  display: flex;
+  flex-direction: column;
+  background-color: aliceblue;
+  justify-content: center;
+  align-items: center;
+}
+
+.upload-container form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.upload-container button, hr{
+  width: 70%;
+}
+.upload-container h2{
+  margin-top: 1rem;
+}
+.upload-container input{
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin: 1rem 0rem;
+}
+
