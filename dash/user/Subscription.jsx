@@ -44,7 +44,7 @@ function Subscription() {
   return (
     <div className="user-subscribed-container">
       <h3>Subscription</h3>
-      <hr />
+      <hr className="user-subscribed-container-hr"/>
       {userInfo.subscribed && (
         <div className="user-subscribed-content">
           <div>
@@ -53,7 +53,7 @@ function Subscription() {
           <div>
             Validity: <span>Lifetime</span>
           </div>
-          <hr />
+          <hr className="user-subscribed-container-hr"/>
           <div className="wish-to-cancel">Wish to cancel?</div>
           <button
             className="user-unsubscribe-button"

@@ -10,25 +10,45 @@ import { useNavigate } from "react-router-dom";
 import InfiniteCarousel from "../components/InfiniteCarousel";
 import usePingUser from "../hooks/usePingUser";
 
-
 function Courses() {
-  const { serverDown, setServerDown, loading, setLoading, userInfo } = useGlobalState();
+  const { serverDown, setServerDown, loading, setLoading, userInfo, APIURL } =
+    useGlobalState();
   const [courses, setCourses] = useState(null);
   const [option, setOption] = useState(""); // State to track the selected option
   const [optionType, setOptionType] = useState(""); // State to track the selected option
-  const [modalId, setModalId] = useState(null)
-  const [modalOpen, setModalOpen] = useState(false)
+  const [modalId, setModalId] = useState(null);
+  const [modalOpen, setModalOpen] = useState(false);
   const { pingUser } = usePingUser();
+  const [userCourses, setUserCourses] = useState([]);
 
   const navigate = useNavigate();
-  
+
+  useEffect(() => {
+    async function presentCourses() {
+      try {
+        const courses = await axios.get(
+          `${APIURL}user/my/courses/${userInfo.id}`,
+          { withCredentials: true }
+        );
+        if (!courses.error) {
+          setUserCourses(courses.data);
+          console.log(courses.data);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    if (userInfo && userInfo.role === "user") {
+      presentCourses();
+    }
+  }, []);
 
   async function getCourses() {
-    setLoading(true)
+    setLoading(true);
     try {
       const response = await axios.get("http://localhost:4001/course/all");
       setCourses(response.data);
-      setLoading(false)
+      setLoading(false);
     } catch (error) {
       console.error("Fetch courses error", error);
       setServerDown(true);
@@ -52,46 +72,43 @@ function Courses() {
   const filteredCoursesType = courses
     ? optionType === ""
       ? filteredCourses // Show all courses when no option is selected
-      : filteredCourses.filter(
-          (course) => course.type === optionType
-        )
+      : filteredCourses.filter((course) => course.type === optionType)
     : null;
 
   const handleCourseClick = (id) => {
     // console.log("id", id)
-    setModalId(id)
-    setModalOpen(true)
-  }
+    setModalId(id);
+    setModalOpen(true);
+  };
 
   const handleOption = (op) => {
-      setOptionType("")
-      setOption(op)
-  }
-
+    setOptionType("");
+    setOption(op);
+  };
 
   return (
     <div className="courses-body">
-      <InfiniteCarousel/>
+      <InfiniteCarousel />
       <h2>Courses</h2>
-      <hr className="hr-body"/>
+      <hr className="hr-body" />
       <div className="courses-options">
-        <p className="p-option" onClick={()=>handleOption("")}>
+        <p className="p-option" onClick={() => handleOption("")}>
           All
         </p>
         <p> | </p>
-        <p className="p-option" onClick={()=>handleOption("In-Person")}>
+        <p className="p-option" onClick={() => handleOption("In-Person")}>
           In-person
         </p>
         <p> | </p>
-        <p className="p-option" onClick={()=>handleOption("Hybrid")}>
+        <p className="p-option" onClick={() => handleOption("Hybrid")}>
           Hybrid
         </p>
         <p> | </p>
-        <p className="p-option" onClick={()=>handleOption("Online")}>
+        <p className="p-option" onClick={() => handleOption("Online")}>
           Online
         </p>
       </div>
-      <hr  className="hr-options"/>
+      <hr className="hr-options" />
       <div className="courses-options-type">
         <p className="p-option" onClick={() => setOptionType("")}>
           All
@@ -116,16 +133,31 @@ function Courses() {
           <Spinner />
         ) : filteredCoursesType ? (
           <div className="courseList">
-            {filteredCoursesType.map((course) => (
-              <CourseCard key={course.id} course={course} onClick={() => handleCourseClick(course.id)} />
-            ))}
+            {filteredCoursesType.map((course) => {
+              // Check if the course is in userCourses array
+              const isEnrolled = userCourses.some((userCourse) => userCourse.id === course.id);
+
+              return (
+                <CourseCard
+                  key={course.id}
+                  course={course}
+                  onClick={() => handleCourseClick(course.id)}
+                  isEnrolled={isEnrolled}
+                  setUserCourses={setUserCourses}
+                />
+              );
+            })}
           </div>
-        ) : <p>No courses found</p>} 
+        ) : (
+          <p>No courses found</p>
+        )}
       </div>
-      {modalOpen && (<Modal onClose={()=>setModalOpen(false)}>
-              <SingleCourse id={modalId}/>
-        </Modal>)}
-      <InfiniteCarousel/>
+      {modalOpen && (
+        <Modal onClose={() => setModalOpen(false)}>
+          <SingleCourse id={modalId} />
+        </Modal>
+      )}
+      <InfiniteCarousel />
     </div>
   );
 }

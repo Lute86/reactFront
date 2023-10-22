@@ -114,7 +114,7 @@ const UpdateUser = ({ user }) => {
     <div className="update-user-container">
       <div className="update-user-form">
         <h1>My profile</h1>
-        <hr/>
+        <hr className="update-user-form-hr"/>
         <div>
           <label
             htmlFor="name"

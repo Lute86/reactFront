@@ -11,7 +11,7 @@ const ListQueries = ({ close }) => {
   const [allQueriesChanged, setAllQueriesChanged] = useState(false);
   const [editQuery, setEditQuery] = useState(false);
   const [editId, setEditId] = useState(null)
-  const [from, setFrom] = useState("");
+  const [from, setFrom] = useState(userInfo.email);
   const [email, setEmail] = useState("");
   const [reason, setReason] = useState("");
   const [description, setDescription] = useState("");
@@ -210,7 +210,7 @@ const ListQueries = ({ close }) => {
             </div>
             <div>
               <label htmlFor="description">
-                Text:
+                Answer:
               </label>
               <textarea
                 id="description"

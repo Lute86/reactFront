@@ -20,8 +20,9 @@
   font-size: 24px;
   text-align: center;
 }
-.update-user-form hr {
-  margin-bottom: 10px;
+.update-user-form-hr {
+  margin: auto;
+  margin-bottom: 1rem;
 }
 .update-user-form label {
   display: block;

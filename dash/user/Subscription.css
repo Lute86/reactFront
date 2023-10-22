@@ -5,8 +5,9 @@
   width: 40vh;
 }
 
-.user-subscribed-container hr{
+.user-subscribed-container-hr{
   margin-bottom: 15px;
+  margin: auto;
 }
 .user-subscribed-container h3{
   margin-top: 1rem;

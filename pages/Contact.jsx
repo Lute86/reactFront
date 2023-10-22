@@ -34,7 +34,7 @@ function ContactForm() {
   const handleContact = async () => {
     setLoading(true);
     setFailedInput(new Set());
-
+    setServerDown(false)
     try {
       const contactData = {
         name,
@@ -62,7 +62,7 @@ function ContactForm() {
     } catch (error) {
       console.error("Contact error", error);
       setLoginError(true);
-      if (error.response !== undefined && error.response.status === 500) {
+      if (error.code === "ERR_NETWORK"||error.response !== undefined && error.response.status === 500) {
         setServerDown(true);
       } else if (error.response && error.response.status === 400) {
         const paramValues = error.response.data.errors;
@@ -137,7 +137,7 @@ function ContactForm() {
               />
             </div>
             <p className={loginError ? "p-login-error" : "p-login"}>
-              {serverDown ? "Server down" : loginError ? "Missing fields" : ''}
+              {serverDown ? "Server down" : loginError ? "Missing/wrong fields" : ''}
             </p>
             <button onClick={handleContact}>
               {!loading ? "Submit" : <Spinner />}

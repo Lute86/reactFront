@@ -29,6 +29,7 @@ function Login() {
   }, []);
 
   const handleLogin = async () => {
+    setServerDown(false)
     setLoading(true)
     try {
       const response = await axios.post(
@@ -58,7 +59,7 @@ function Login() {
     } catch (error) {
       console.error("Login error", error);
   
-      if (error.response && error.response.status === 401) {
+      if (error.response && (error.response.status === 401||error.response.status===400)) {
         setLoginError(true);
       } else if (error.response && error.response.status === 500) {
         setServerDown(true);

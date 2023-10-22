@@ -88,9 +88,9 @@ function Welcome() {
         <div className="subscription-content">
           <h2>Unlock a World of Knowledge</h2>
           <hr />
-          <p>
+          {!userInfo && <p>
           Gain unlimited access to a diverse range of courses, expert trainings, and valuable career resources. Dive into limitless knowledge with our 30 days trial. You'll enjoy:
-          </p>
+          </p>}
           <ul className="subscription-features">
             <li>Community forums for networking and collaboration</li>
             <li>Unrestricted access to all current and future courses</li>
@@ -99,13 +99,13 @@ function Welcome() {
             <li>Regular updates and new content additions</li>
             <li>Personalized career guidance and support</li>
           </ul>
-          <p>
+          {!userInfo && <><p>
             Don't miss this opportunity! Register now and embark
             on a journey of continuous learning and professional growth.
           </p>
           <div className="subscription-button">
             <button onClick={handleSubscription}>Register Now</button>
-          </div>
+          </div></>}
         </div>
       </section>
 

@@ -8,8 +8,10 @@
   box-shadow: 12px 12px 10px rgba(0, 0, 0, 0.315); /* Add the box shadow */
 }
 
-.list-user-courses-container hr{
-  width: 15px;
+.course-list-container-hr{
+  width: 10rem;
+  margin: auto;
+  margin-bottom: 0.5rem;
 }
 
 .h2-user-courses{

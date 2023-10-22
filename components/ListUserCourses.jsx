@@ -5,7 +5,7 @@ import { useGlobalState } from "../context";
 
 const ListUserCourses = ({ data, onDelete }) => {
   const { setModalOpen } = useGlobalState();
-
+  console.log(data);
   if (!data || data.length === 0) {
     return (
       <>
@@ -14,7 +14,7 @@ const ListUserCourses = ({ data, onDelete }) => {
       </>
     );
   }
-  const tableHeaders = ['course_name', 'modality', 'duration','start_date', 'finish_date', 'teachers'];
+  const tableHeaders = ['course_name', 'modality', 'duration','start_date', 'finish_date'];
   return (
     <div className="list-user-course-container">
       <div className="scrollable-table">
@@ -31,7 +31,9 @@ const ListUserCourses = ({ data, onDelete }) => {
             {data.map((item) => (
               <tr key={item.id}>
                 {tableHeaders.map((header) => (
-                  <td key={header}>{item[header]}</td>
+                  <td key={header}>
+                    {item[header]}
+                    </td>
                 ))}
                 <td>
                   <button onClick={() => onDelete(item.id)}>

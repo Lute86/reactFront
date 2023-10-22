@@ -52,7 +52,7 @@ const UserCoursesList = () => {
   return (
     <div className="course-list-container">
       <h2 className="h2-user-courses">My Courses</h2>
-      <hr />
+      <hr className="course-list-container-hr"/>
       <ListUserCourses data={courses} onDelete={unsubscribeFromCourse} />
     </div>
   );
