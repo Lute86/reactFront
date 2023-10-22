@@ -15,6 +15,7 @@ function Courses() {
   const { serverDown, setServerDown, loading, setLoading, userInfo } = useGlobalState();
   const [courses, setCourses] = useState(null);
   const [option, setOption] = useState(""); // State to track the selected option
+  const [optionType, setOptionType] = useState(""); // State to track the selected option
   const [modalId, setModalId] = useState(null)
   const [modalOpen, setModalOpen] = useState(false)
   const { pingUser } = usePingUser();
@@ -48,32 +49,64 @@ function Courses() {
           (course) => course.modality.toLowerCase() === option.toLowerCase()
         )
     : null;
+  const filteredCoursesType = courses
+    ? optionType === ""
+      ? filteredCourses // Show all courses when no option is selected
+      : filteredCourses.filter(
+          (course) => course.type === optionType
+        )
+    : null;
 
   const handleCourseClick = (id) => {
     // console.log("id", id)
     setModalId(id)
     setModalOpen(true)
   }
+
+  const handleOption = (op) => {
+      setOptionType("")
+      setOption(op)
+  }
+
+
   return (
     <div className="courses-body">
       <InfiniteCarousel/>
       <h2>Courses</h2>
-      <hr />
+      <hr className="hr-body"/>
       <div className="courses-options">
-        <p className="p-option" onClick={() => setOption("")}>
+        <p className="p-option" onClick={()=>handleOption("")}>
           All
         </p>
         <p> | </p>
-        <p className="p-option" onClick={() => setOption("In-Person")}>
+        <p className="p-option" onClick={()=>handleOption("In-Person")}>
           In-person
         </p>
         <p> | </p>
-        <p className="p-option" onClick={() => setOption("Hybrid")}>
+        <p className="p-option" onClick={()=>handleOption("Hybrid")}>
           Hybrid
         </p>
         <p> | </p>
-        <p className="p-option" onClick={() => setOption("Online")}>
+        <p className="p-option" onClick={()=>handleOption("Online")}>
           Online
+        </p>
+      </div>
+      <hr  className="hr-options"/>
+      <div className="courses-options-type">
+        <p className="p-option" onClick={() => setOptionType("")}>
+          All
+        </p>
+        <p> | </p>
+        <p className="p-option" onClick={() => setOptionType("course")}>
+          Course
+        </p>
+        <p> | </p>
+        <p className="p-option" onClick={() => setOptionType("career")}>
+          Career
+        </p>
+        <p> | </p>
+        <p className="p-option" onClick={() => setOptionType("training")}>
+          Training
         </p>
       </div>
       <div className="container-courses">
@@ -81,9 +114,9 @@ function Courses() {
           <p className="p-courses-error">Error: Server is not responding</p>
         ) : loading ? (
           <Spinner />
-        ) : filteredCourses ? (
+        ) : filteredCoursesType ? (
           <div className="courseList">
-            {filteredCourses.map((course) => (
+            {filteredCoursesType.map((course) => (
               <CourseCard key={course.id} course={course} onClick={() => handleCourseClick(course.id)} />
             ))}
           </div>

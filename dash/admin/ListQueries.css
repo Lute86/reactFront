@@ -123,6 +123,75 @@
 }
 
 
+/*Email Form*/
+
+.email-form {
+  width: 100%;
+  background-color: #e0dddd;
+  padding: 2rem;
+  border-radius: 10px;
+  /* box-shadow: 12px 12px 10px rgba(0, 0, 0, 0.315); */
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.315);
+}
+
+.email-form h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.email-form div {
+  margin-bottom: 20px;
+}
+
+.email-form label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.email-form input,
+.email-form input,
+.email-form textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  outline: none;
+}
+
+.email-form textarea {
+  height: 100px;
+}
+
+.email-form button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  margin: 1rem auto; /* Center the button horizontally and add margin to control spacing */
+  display: block; /* Ensure the button takes up full width */
+  width: 100%;
+}
+
+.email-form button:hover {
+  background-color: #0056b3;
+}
+
+.wrong-data{
+  color: red;
+}
+
+
+@media screen and (max-width: 786px) {
+  .email-form{
+    width: 90%;
+  }
+}
+
 
 @media screen and (max-width: 786px) {
   .all-queries-list-container{

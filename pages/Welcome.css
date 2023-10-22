@@ -7,6 +7,17 @@
 .welcome-container h2 {
   font-size: xx-large;
   color: var(--mainColorLight);
+  text-shadow: 1px 1px ;
+  margin-bottom: 2rem;
+}
+
+.welcome-container hr{
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+  width: 20%;
+  margin: 0 auto;
+  margin-bottom: 2rem;
 }
 
 /* Image */
@@ -69,7 +80,7 @@
 }
 
 .p-about {
-  padding: 2rem 2rem;
+  padding: 0rem 2rem;
 }
 
 .img-about {
@@ -201,9 +212,6 @@ p {
   margin: 0 auto;
 }
 
-.subscription h2 {
-  margin-bottom: 2rem;
-}
 
 .subscription-features {
   display: flex;
@@ -229,10 +237,13 @@ p {
   font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  box-shadow: 0px 0px 10px black;
 }
 
 .subscription-button button:hover {
   background-color: #007bff;
+  box-shadow: 0px 0px 10px white;
+
 }
 
 /* Login link */

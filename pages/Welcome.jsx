@@ -37,6 +37,7 @@ function Welcome() {
           </div>
           <div className="about-us-right">
             <h2>About Us</h2>
+            <hr />
             <p className="p-about">
               We're a regional government enterprise dedicated to partnering
               with various companies to provide skill development courses for
@@ -86,6 +87,7 @@ function Welcome() {
       <section className="subscription">
         <div className="subscription-content">
           <h2>Unlock a World of Knowledge</h2>
+          <hr />
           <p>
           Gain unlimited access to a diverse range of courses, expert trainings, and valuable career resources. Dive into limitless knowledge with our 30 days trial. You'll enjoy:
           </p>
@@ -147,6 +149,7 @@ function Welcome() {
       {/* Companies section */}
       <section className="companies-involved">
         <h2>Companies Involved</h2>
+        <hr />
         <p className="p-companies">
           We collaborate with a diverse range of companies to offer
           comprehensive courses that cater to various industries and skills.

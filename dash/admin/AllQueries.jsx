@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import './AllUsers.css'
+import './AllQueries.css'
 import { useGlobalState } from '../../context'
 import ListQueries from "./ListQueries";
 import { CiViewList } from "react-icons/ci";
@@ -15,9 +15,9 @@ const AllQueries = ({ choice }) => {
     setOpenQueriesList(true);
   }
 
-  function handleEdit() {
-    //TODO
-  }
+  // function handleEdit() {
+  //   //TODO
+  // }
 
   function handleChoice() {
     choice()
@@ -26,23 +26,23 @@ const AllQueries = ({ choice }) => {
 
 
   return (
-    <div className="allcourses-modal" onClick={handleChoice}>
+    <div className="allqueries-modal" onClick={handleChoice}>
       {!openQueriesList && (
         <div
-        className="allcourses-modal-content"
+        className="allqueries-modal-content"
         onClick={(event) => event.stopPropagation()}
         >
           <h3>Queries</h3>
           <hr />
-          <div className="allcourses-inside-content">
+          <div className="allqueries-inside-content">
+            {/* <div>
+              <FiEdit2 className="allqueries-icon" onClick={handleEdit}/>
+            </div> */}
             <div>
-              <FiEdit2 className="allcourses-icon" onClick={handleEdit}/>
-            </div>
-            <div>
-              <CiViewList className="allcourses-icon" onClick={handleClickList}/>
+              <CiViewList className="allqueries-icon" onClick={handleClickList}/>
             </div>
           </div>
-          <button className="allcourses-inside-button" onClick={handleChoice}>Close</button>
+          <button className="allqueries-inside-button" onClick={handleChoice}>Close</button>
         </div>
       )}
       {openQueriesList && (

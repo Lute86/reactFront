@@ -40,6 +40,7 @@ function AdminDash() {
     <div className="admin-main-container">
       <div className="admin-greet-container">
         <p className="p-admin-greet">Welcome {userInfo.first_name}!</p>
+        <hr className="hr-admin-greet"/>
       </div>
       <div className="admin-container">
         <div className="admin-profile-container" onClick={()=>handleChoice('profile')}>
@@ -48,7 +49,7 @@ function AdminDash() {
         <div className="admin-course-container" onClick={()=>handleChoice('courses')}>
           <h3>Courses</h3>
         </div>
-        <div className="admin-subscription-container" onClick={()=>handleChoice('queries')}>
+        <div className="admin-queries-container" onClick={()=>handleChoice('queries')}>
           <h3>Queries</h3>
         </div>
       </div>

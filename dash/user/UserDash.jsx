@@ -68,6 +68,7 @@ function UserDash() {
     <div className="user-main-container">
       <div className="user-greet-container">
         <p className="p-user-greet">Welcome {userInfo.first_name}!</p>
+        <hr className="hr-user-greet"/>
       </div>
       <div className="user-container">
         <div className="user-profile-container" onClick={()=>handleChoice('profile')}>

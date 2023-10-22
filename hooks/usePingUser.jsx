@@ -55,6 +55,7 @@ function usePingUser() {
       setUserInfo(null);
       setIsLoggedIn(false);
       setUserRole("");
+      setUserInfo("")
     }
   }
 
